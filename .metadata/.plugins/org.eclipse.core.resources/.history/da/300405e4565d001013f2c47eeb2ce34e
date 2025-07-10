@@ -1,0 +1,34 @@
+package DesignGrade;
+
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.EmptyBorder;
+
+public class DeletePanel extends JPanel {
+    public DeletePanel() {
+        setBackground(new Color(255, 220, 220));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JLabel deleteLabel = new JLabel("삭제", SwingConstants.CENTER);
+        deleteLabel.setBorder(new EmptyBorder(2, 20, 2, 20));
+        deleteLabel.setOpaque(true);
+        deleteLabel.setBackground(new Color(210, 240, 250));
+        deleteLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        deleteLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        deleteLabel.setPreferredSize(new Dimension(100, 40));
+        add(deleteLabel);
+        add(Box.createVerticalStrut(80));
+
+        JPanel delInputName = new JPanel(new GridLayout(1,2,10,10));
+        delInputName.setBackground(new Color(255, 220, 220));
+        JLabel delName = new JLabel("이름", SwingConstants.CENTER);
+        delInputName.add(delName);
+        JTextField delInput = new JTextField(10);
+        delInputName.add(delInput);
+        add(delInputName);
+        add(Box.createVerticalStrut(80));
+
+        JButton delButton = new JButton("삭제");
+        add(delButton);
+    }
+}

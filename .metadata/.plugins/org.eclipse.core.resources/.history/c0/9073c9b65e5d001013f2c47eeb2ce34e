@@ -1,0 +1,12 @@
+package DesignGrade;
+
+import java.awt.Color;
+
+public class Colors {
+    public static final Color PINK = new Color(255,179,186);
+    public static final Color ORANGE = new Color(255,223,186);
+    public static final Color YELLOW = new Color(255,255,186);
+    public static final Color GREEN = new Color(186,255,201);
+    public static final Color BLUE = new Color(186,225,255);    
+    // 필요 색 계속 추가
+}

@@ -1,0 +1,26 @@
+package NumberBaseBall;
+
+import java.util.Arrays;
+
+public class NumberBaseBall2 {
+
+    public static int playOneGame() {
+        String[] allCombi = new String[720]; // 조합 중복 방지용
+        int genCount = 0;
+        
+        
+    }
+    public static void main(String[] args) {
+        int totalRounds = 0;
+        int trials = 100;
+
+        for (int i = 1; i <= trials; i++) {
+            int rounds = playOneGame();
+            System.out.println(i + "번째 게임: " + rounds + " 라운드 만에 정답");
+            totalRounds += rounds;
+        }
+
+        double average = (double) totalRounds / trials;
+        System.out.printf("100회 평균 라운드 수: %.2f회\n", average);
+    }
+}

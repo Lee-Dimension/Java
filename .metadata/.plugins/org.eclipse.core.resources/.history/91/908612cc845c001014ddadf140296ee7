@@ -1,0 +1,14 @@
+package day13;
+
+import java.awt.*;
+
+public class CheckBoxEx {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Frame f=new Frame("Frame");
+		
+		Panel p = new Panel();
+	}
+
+}

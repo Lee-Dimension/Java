@@ -1,0 +1,8 @@
+package DesignGrade;
+
+public class Snippet {
+	public static void main(String[] args) {
+		        f.setVisible(true);
+	}
+}
+

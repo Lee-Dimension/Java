@@ -1,0 +1,18 @@
+package day13;
+
+import java.awt.*
+;
+
+public class FrameEx1 extends Frame{
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		FrameEx1 f = new FrameEx1();
+		
+		f.setTitle("Frame Test");
+		
+		f.setSize(300,300);
+		f.setVisible(true);
+
+	}
+
+}

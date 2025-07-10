@@ -1,0 +1,55 @@
+package DesignGrade;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+public class InputPanel {
+    // 입력 패널 
+    JPanel inputPanel = new JPanel();
+    inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+    inputPanel.setBackground(new Color(255, 220, 220));
+
+    // 제목(박스 맨 위)
+    JLabel inputLabel = new JLabel("입력", SwingConstants.CENTER);
+    inputLabel.setBorder(new EmptyBorder(2, 20, 2, 20)); 
+    inputLabel.setOpaque(true);
+    inputLabel.setBackground(new Color(210, 240, 250)); //연하늘
+    inputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    inputLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+    inputLabel.setPreferredSize(new Dimension(100, 40));
+    inputPanel.add(inputLabel);
+    inputPanel.add(Box.createVerticalStrut(10));
+
+    // 입력받는 그리드 패널(박스 중간)
+    JPanel formPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+    formPanel.setBackground(new Color(255, 220, 220)); // 연핑크
+    formPanel.add(new JLabel("이름"));
+    formPanel.add(new JTextField(15));
+    formPanel.add(new JLabel("국어점수"));
+    formPanel.add(new JTextField(5));
+    formPanel.add(new JLabel("영어점수"));
+    formPanel.add(new JTextField(5));
+    formPanel.add(new JLabel("수학점수"));
+    formPanel.add(new JTextField(5));
+    inputPanel.add(formPanel);
+
+    // 저장버튼(박스 맨아래)
+    JButton saveBtn = new JButton("저장");
+    saveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+    inputPanel.add(Box.createVerticalStrut(10));
+    inputPanel.add(saveBtn);
+
+    // 오른쪽 패널에 넣기
+    cardPanel.add(inputPanel);
+}

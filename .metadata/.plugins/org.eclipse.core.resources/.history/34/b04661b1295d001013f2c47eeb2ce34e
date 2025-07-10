@@ -1,0 +1,17 @@
+package day14;
+
+import java.awt.*;
+
+public class FrameEx1 extends Frame implements WindowLisnner{
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Frame f = new Frame();
+		
+		f.setTitle("Frame Test");
+		
+		f.setSize(300,300);
+		f.setVisible(true);
+
+	}
+
+}

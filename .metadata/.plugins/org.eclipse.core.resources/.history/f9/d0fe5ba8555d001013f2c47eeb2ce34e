@@ -1,0 +1,39 @@
+package DesignGrade;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+
+public class InputPanel extends JPanel {
+    public InputPanel() {
+        setBackground(new Color(255, 220, 220));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JLabel inputLabel = new JLabel("입력", SwingConstants.CENTER);
+        inputLabel.setBorder(new EmptyBorder(2, 20, 2, 20));
+        inputLabel.setOpaque(true);
+        inputLabel.setBackground(new Color(210, 240, 250));
+        inputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        inputLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        inputLabel.setPreferredSize(new Dimension(100, 40));
+        add(inputLabel);
+        add(Box.createVerticalStrut(10));
+
+        JPanel inMiddle = new JPanel(new GridLayout(4, 2, 10, 10));
+        inMiddle.setBackground(new Color(255, 220, 220));
+        inMiddle.add(new JLabel("이름"));
+        inMiddle.add(new JTextField(15));
+        inMiddle.add(new JLabel("국어점수"));
+        inMiddle.add(new JTextField(5));
+        inMiddle.add(new JLabel("영어점수"));
+        inMiddle.add(new JTextField(5));
+        inMiddle.add(new JLabel("수학점수"));
+        inMiddle.add(new JTextField(5));
+        add(inMiddle);
+
+        JButton saveBtn = new JButton("저장");
+        saveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(Box.createVerticalStrut(10));
+        add(saveBtn);
+    }
+}

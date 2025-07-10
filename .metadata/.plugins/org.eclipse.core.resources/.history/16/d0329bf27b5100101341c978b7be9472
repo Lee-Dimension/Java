@@ -1,0 +1,19 @@
+
+public class Loop4 {
+
+	public static void main(String[] args) {
+		
+		int numFront = 2;
+		while(numFront<=9) {
+			int numBehind = 1;
+			while(numBehind<=9) {
+			System.out.print(numFront +"X"+ numBehind + "=" + numFront * numBehind + "\t");
+			numFront +=1;
+			numBehind +=1;
+			}
+			System.out.println();
+		}
+
+	}
+
+}

@@ -1,0 +1,22 @@
+package day14;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class ActionEventEx extends Frame implements ActionListener{
+	Panel p;
+	Button input, exit;
+	TextArea ta;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

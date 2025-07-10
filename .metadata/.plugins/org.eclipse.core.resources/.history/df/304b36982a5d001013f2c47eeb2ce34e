@@ -1,0 +1,13 @@
+package day14;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class ActionEventEx extends Frame implements ActionListener{
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

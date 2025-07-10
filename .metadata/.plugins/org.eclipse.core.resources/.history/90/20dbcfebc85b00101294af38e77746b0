@@ -1,0 +1,113 @@
+package day12;
+
+import java.util.*;
+import static java.lang.System.out;
+
+public class GradeArrayList {
+	Scanner sc = new Scanner(System.in);
+	ArrayList<String> name = new ArrayList<String>();
+	ArrayList<Integer> korean = new ArrayList<Integer>();
+	ArrayList<Integer> english = new ArrayList<Integer>();	
+	ArrayList<Integer> math = new ArrayList<Integer>();	
+	
+	//입력받기
+	public void inputMethod() {
+		
+		out.println("===========입력===========");
+		out.print("이름을 입력하세요 : ");
+		name.add(sc.next());
+		
+		out.print("국어점수를 입력하세요 : ");
+		korean.add(sc.nextInt());
+		
+		out.print("영어점수를 입력하세요 : ");
+		english.add(sc.nextInt());
+		
+		out.print("수학점수를 입력하세요 : ");
+		math.add(sc.nextInt());
+		
+		out.println("저장완료");		
+	}
+	
+	//출력하기
+	public void outputMethod() {
+		while(true) {
+			out.println("===========출력===========");
+			out.println("(1):전체출력\n(2):과목출력\n(3):돌아가기");
+			out.print("선택 : ");
+			int select = sc.nextInt();
+			if(select ==1) {
+				for(int i=0; i<name.size();i++) {
+						out.println("---------------------------");
+						out.println("이름 : " + name.get(i)+"\n국어점수 : "+ korean.get(i)+"\n영어점수 : "
+								+ english.get(i)+"\n수학점수 : "+math.get(i));
+				}
+			}
+			if(select == 2) {
+				out.println("---------------------\n국어\t영어\t수학\n---------------------");
+				out.print("어떤 과몸을 출력하시겠습니까?");
+				String selectSub = sc.next();
+				if(selectSub.equals("국어")) {
+					for(int i=0; i<name.size();i++) {
+						out.println("이름 : " + name.get(i)+"\n국어점수 : "+ korean.get(i));
+					}
+				}else if(selectSub.equals("영어")) {
+					for(int i=0; i<name.size();i++) {
+						out.println("이름 : " + name.get(i)+"\n영어점수 : "+ english.get(i));
+					}
+				}else if(selectSub.equals("수학")) {
+					for(int i=0; i<name.size();i++) {
+						out.println("이름 : " + name.get(i)+"\n수학점수 : "+ math.get(i));
+					}
+				}else {
+					out.println("과목명을 입력해주세요.");
+					continue;
+				}
+			}
+			if(select == 3) {
+				break;
+			}
+		}
+	}
+	//검색
+	public void searchMethod() {
+		while(true){
+			out.println("===========검색===========");
+			out.println("(1):이름으로 검색\n(2):평균으로 검색\n(3):돌아가기");
+			out.print("선택 : ");
+			int select = sc.nextInt();
+			if(select==1) {
+				for(String name : name) {
+					
+				}
+			}
+		}
+	}
+	
+	
+	//삭제
+	
+	
+	//종료
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GradeArrayList gd = new GradeArrayList();
+
+		while(true) {
+			out.println("=========성적 관리 시스템=========");
+			out.println("(1):입력\n(2):출력\n(3):검색\n(4):삭제\n(5):종료");
+			out.print("선택 : ");
+			int select = gd.sc.nextInt();
+			
+			if(select==1) { gd.inputMethod(); continue;}
+			else if(select==2) { gd.outputMethod(); continue; }
+			
+			else if(select==3 ) {
+			
+			else if(select==5) { out.println("종료합니다."); return; }
+		}
+	}
+}

@@ -1,0 +1,47 @@
+package DesignGrade;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class OutputPanel extends JPanel {
+    public OutputPanel() {
+        setBackground(new Color(255, 220, 220));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JLabel outputLabel = new JLabel("출력", SwingConstants.CENTER);
+        outputLabel.setOpaque(true);
+        outputLabel.setBackground(new Color(210, 240, 250));
+        outputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        outputLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        add(outputLabel);
+        add(Box.createVerticalStrut(10));
+
+        JPanel outMiddle = new JPanel(new BorderLayout());
+        outMiddle.setBackground(new Color(255, 220, 220));
+
+        //버튼 패널
+        JPanel outMidBtn = new JPanel(new GridLayout(4, 1, 10, 10));
+        outMidBtn.setBackground(new Color(255, 220, 220));
+        JButton btnAll = new JButton("전체출력");
+        btnAll.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnAll);
+        JButton btnKor = new JButton("국어출력");
+        btnKor.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnKor);
+        JButton btnEng = new JButton("영어출력");
+        btnEng.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnEng);
+        JButton btnMat = new JButton("수학출력");
+        btnMat.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnMat);
+
+        outMiddle.add(outMidBtn, BorderLayout.WEST);
+
+        JTextField outputField = new JTextField(15);
+        outputField.setBackground(new Color(255, 255, 255));
+        outputField.setEditable(false);
+        outMiddle.add(outputField, BorderLayout.EAST);
+
+        add(outMiddle);
+    }
+}

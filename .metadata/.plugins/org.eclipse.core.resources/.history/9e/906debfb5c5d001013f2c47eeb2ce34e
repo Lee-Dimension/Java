@@ -1,0 +1,52 @@
+package DesignGrade;
+
+import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+
+public class DeletePanel extends JPanel {
+    public DeletePanel() {
+        setBackground(new Color(255, 220, 220));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JLabel deleteLabel = new JLabel("삭제", SwingConstants.CENTER);
+        deleteLabel.setOpaque(true);
+        deleteLabel.setBackground(Colors.BACKGROUND);
+        deleteLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        deleteLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        add(deleteLabel);
+        add(Box.createVerticalStrut(80));
+
+        JPanel delInputName = new JPanel(new GridLayout(1,2,10,10));
+        delInputName.setBackground(new Color(255, 220, 220));
+        JLabel delName = new JLabel("이름", SwingConstants.CENTER);
+        delInputName.add(delName);
+        JTextField delInput = new JTextField(10);
+        delInputName.add(delInput);
+        add(delInputName);
+        add(Box.createVerticalStrut(80));
+
+        JButton delButton = new JButton("삭제");
+        add(delButton);
+        
+        delButton.addActionListener(e -> {
+            String stuName = delInput.getText(); // 콘솔 코드와 변수명, 로직 똑같이
+            boolean found = false;
+            Iterator<Student> iter = StudentManager.students.iterator();
+            
+            while (iter.hasNext()) {
+                Student s = iter.next();
+                if (s.name.equals(stuName)) {
+                    iter.remove();
+                    JOptionPane.showMessageDialog(this, "삭제하였습니다.");
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                JOptionPane.showMessageDialog(this, "해당 이름의 학생이 없습니다.");
+            }
+            delInput.setText("");
+        });
+    }
+}

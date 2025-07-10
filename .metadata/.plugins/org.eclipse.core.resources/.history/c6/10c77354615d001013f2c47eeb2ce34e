@@ -1,0 +1,154 @@
+package DesignGrade;
+
+import java.util.*;
+import java.util.List;
+
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.EmptyBorder;
+
+public class SearchPanel extends JPanel {
+    public SearchPanel() {
+        setBackground(Colors.VIOLET);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        //패널제목
+        JLabel searchLabel = new JLabel("검색", SwingConstants.CENTER);
+        searchLabel.setOpaque(true);
+        searchLabel.setBackground(Colors.GREEN);
+        searchLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        searchLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        add(searchLabel);
+        add(Box.createVerticalStrut(10));
+        
+        JPanel searchModePanel = new JPanel(new GridLayout(1,2,10,10));
+        searchModePanel.setBackground(Colors.VIOLET);
+	        //이름버튽
+	        JButton nameBtn = new JButton("이름");
+	        nameBtn.setBackground(Colors.YELLOW);
+	        searchModePanel.add(nameBtn);
+	        //평균버튼
+	        JButton meanBtn = new JButton("평균");
+	        meanBtn.setBackground(Colors.YELLOW);
+	        searchModePanel.add(meanBtn);
+	        add(searchModePanel);
+
+		        // 카드 영역
+		        JPanel searchCard = new JPanel(new CardLayout());
+		        searchCard.setBackground(Colors.VIOLET);
+		        searchCard.setBorder(new EmptyBorder(30, 20, 30, 20));
+		        add(searchCard);
+		
+		        // 이름 검색 카드
+		        JPanel searchNameBox = new JPanel();
+		        searchNameBox.setLayout(new BoxLayout(searchNameBox, BoxLayout.Y_AXIS));
+		        
+		        JPanel nameGrid = new JPanel(new GridLayout(1,3,10,10));
+		        nameGrid.setBackground(Colors.VIOLET);
+		        
+		        JLabel nameLabel = new JLabel("이름", SwingConstants.CENTER);
+		        nameGrid.add(nameLabel);
+		        
+		        JTextField nameField = new JTextField();
+		        nameGrid.add(nameField);
+		        
+		        JButton nameButton = new JButton("확인");
+		        nameButton.setBackground(Colors.BLUE);
+		        nameGrid.add(nameButton);    
+		        searchNameBox.add(nameGrid);
+	        
+		        //출력창
+		        JTextArea outPutArea = new JTextArea(4, 25);
+		        outPutArea.setEditable(false);
+		        searchNameBox.add(new JScrollPane(outPutArea)); 
+		        
+		        // 이름검색 동작
+		        nameButton.addActionListener(e -> {
+		            String searchName = nameField.getText();
+		            boolean found = false;
+		            StringBuilder sb = new StringBuilder();
+		            for (Student s : StudentManager.students) {
+		                if (s.name.equals(searchName)) {
+		                    sb.append("이름: ").append(s.name)
+		                      .append("\n국어: ").append(s.korean)
+		                      .append("\n영어: ").append(s.english)
+		                      .append("\n수학: ").append(s.math);
+		                    found = true;
+		                    break;
+		                }
+		            }
+		            if (!found) {
+		                sb.append("검색 결과가 없습니다.");
+		            }
+		            outPutArea.setText(sb.toString());
+		        });
+		
+		        // 평균 검색 카드
+		        JPanel searchMeanBox = new JPanel();
+		        searchMeanBox.setLayout(new BoxLayout(searchMeanBox, BoxLayout.Y_AXIS));
+		        
+		        JPanel meanGrid = new JPanel(new GridLayout(1,3,10,10));
+		        meanGrid.setBackground(Colors.VIOLET);
+		        
+		        JLabel meanLabel = new JLabel("평균", SwingConstants.CENTER);
+		        meanGrid.add(meanLabel);
+		        
+		        JTextField meanField = new JTextField();
+		        meanGrid.add(meanField);
+		        
+		        JButton meanButton = new JButton("확인");
+		        meanButton.setBackground(Colors.BLUE);
+		        meanGrid.add(meanButton);
+		        searchMeanBox.add(meanGrid);
+		        
+		        JTextArea meanOutArea = new JTextArea(5, 30);
+		        meanOutArea.setEditable(false);
+		        searchMeanBox.add(new JScrollPane(meanOutArea));
+		        
+		        // 평균검색 동작
+		        meanButton.addActionListener(e -> {
+		            String input = meanField.getText();
+		            StringBuilder sb = new StringBuilder();//apend 쓰려면 있어야함.
+		            List<Student> filtered = new ArrayList<>();
+		
+		            if (input.equals("")) {
+		                // 입력이 빈칸이면 전체 학생
+		                filtered.addAll(StudentManager.students);
+		            } else {
+		                int minMean = Integer.parseInt(input);
+		                for (Student s : StudentManager.students) {
+		                    double avg = (s.korean + s.english + s.math) / 3.0;
+		                    if (avg >= minMean) filtered.add(s);
+		                }
+		            }
+		
+		            // 평균을 내림차순 정렬
+		            filtered.sort((a, b) -> {
+		                double avgA = (a.korean + a.english + a.math) / 3.0;
+		                double avgB = (b.korean + b.english + b.math) / 3.0;
+		                return Double.compare(avgB, avgA);
+		            });
+		
+		            if (filtered.isEmpty()) {
+		                sb.append("조건에 맞는 학생이 없습니다.");
+		            } else {
+		                for (Student s : filtered) {
+		                    double avg = (s.korean + s.english + s.math) / 3.0;
+		                    sb.append("이름: ").append(s.name)
+		                      .append(" | 평균: ").append(String.format("%.2f", avg))
+		                      .append("\n국어: ").append(s.korean)
+		                      .append(" | 영어: ").append(s.english)
+		                      .append(" | 수학: ").append(s.math)
+		                      .append("\n\n");
+		                }
+		            }
+		            meanOutArea.setText(sb.toString());
+		        });
+          
+        searchCard.add(searchNameBox, "NAME");
+        searchCard.add(searchMeanBox, "MEAN");
+
+        CardLayout searchcardLayout = (CardLayout) searchCard.getLayout();
+        nameBtn.addActionListener(e -> searchcardLayout.show(searchCard, "NAME"));
+        meanBtn.addActionListener(e -> searchcardLayout.show(searchCard, "MEAN"));
+    }
+}

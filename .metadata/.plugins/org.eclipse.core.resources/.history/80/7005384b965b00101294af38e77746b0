@@ -1,0 +1,25 @@
+package NumberBaseBall;
+
+public class NumberBaseBall21 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int [] allCombi = new int[720];
+		int count = 0;
+
+		for (int j = 0; j < 10; j++) {
+		    for (int k = 0; k < 10; k++) {
+		        for (int l = 0; l < 10; l++) {
+		            if (j != k && j != l && k != l) {
+		                allCombi[count] = j * 100 + k * 10 + l;
+		                count++;
+		            }
+		        }
+		    }
+		}
+		System.out.println(allCombi[1]);
+		
+	}
+
+}

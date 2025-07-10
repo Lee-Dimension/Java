@@ -21,7 +21,7 @@ class Student {
 
 public class GradeTreeMap {
     Scanner sc = new Scanner(System.in);
-    TreeMap<String, Student> students = new TreeMap<>(); // key=학번, value=Student
+    TreeMap<String, Student> students = new TreeMap<>();
 
     // 입력
     public void inputMethod() {
@@ -73,7 +73,7 @@ public class GradeTreeMap {
                     if (sub.equals("국어"))
                         out.println("학번 : " + s.id + " / 이름 : " + s.name + " / 국어점수 : " + s.korean);
                     else if (sub.equals("영어"))
-                        out.println("학번 : " + s.id + " / 이름 : " + s.name + " / 영어점수 : " + s.english);
+                        out.println("학번 : " + s.id + " / 이름 : " +s.name + " / 영어점수 : " + s.english);
                     else if (sub.equals("수학"))
                         out.println("학번 : " + s.id + " / 이름 : " + s.name + " / 수학점수 : " + s.math);
                     else {
@@ -88,6 +88,7 @@ public class GradeTreeMap {
 
     // 검색
     public void searchMethod() {
+    	ArrayList<Student> list = new ArrayList<>(students.values());
         while (true) {
             out.println("===========검색===========");
             out.println("(1):이름으로 검색\n(2):평균으로 검색\n(3):돌아가기");
@@ -112,7 +113,12 @@ public class GradeTreeMap {
                 out.print("평균 몇 점 이상을 검색하시겠습니까? ");
                 int stuMean = sc.nextInt();
                 boolean found = false;
-                for (Student s : students.values()) {
+                list.sort((a, b) -> {
+                    double avgA = (a.korean + a.english + a.math) / 3.0;
+                    double avgB = (b.korean + b.english + b.math) / 3.0;
+                    return Double.compare(avgB, avgA); // 내림차순
+                });
+                for (Student s : list) {
                     double avg = (s.korean + s.english + s.math) / 3.0;
                     if (avg >= stuMean) {
                         out.println("학번 : " + s.id

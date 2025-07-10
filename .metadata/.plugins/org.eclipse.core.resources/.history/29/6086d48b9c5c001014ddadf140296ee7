@@ -1,0 +1,77 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class GradeGUI {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("성적 처리기");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setSize(700, 500);
+
+        // 전체 배경 패널
+        JPanel bgPanel = new JPanel();
+        bgPanel.setBackground(new Color(255, 220, 220)); // 연핑크
+        bgPanel.setLayout(null); // 직접 배치
+
+        // 왼쪽 버튼 패널
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new GridLayout(4, 1, 10, 10));
+        btnPanel.setBackground(new Color(210, 240, 250)); // 연하늘
+        btnPanel.setBounds(30, 60, 120, 220);
+
+        String[] btnTexts = {"--입력--", "검색", "출력", "--삭제--"};
+        JButton[] buttons = new JButton[4];
+        for (int i = 0; i < 4; i++) {
+            buttons[i] = new JButton(btnTexts[i]);
+            buttons[i].setBackground(new Color(210, 240, 250));
+            buttons[i].setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+            btnPanel.add(buttons[i]);
+        }
+
+        // 상단 제목 라벨
+        JLabel title = new JLabel("--입력--", SwingConstants.CENTER);
+        title.setFont(new Font("맑은 고딕", Font.BOLD, 24));
+        title.setBounds(170, 20, 480, 30);
+
+        // 우측 메인 입력/출력 패널
+        JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(null);
+        rightPanel.setBackground(new Color(255, 220, 220));
+        rightPanel.setBounds(170, 60, 480, 340);
+
+        // 입력 필드 (가로로 긴 입력창)
+        JTextField inputField = new JTextField();
+        inputField.setBounds(10, 10, 320, 30);
+        inputField.setBackground(new Color(210, 240, 250));
+        rightPanel.add(inputField);
+
+        // 출력/결과 텍스트 영역 (가운데 큰 네모)
+        JTextArea ta = new JTextArea();
+        ta.setEditable(false);
+        ta.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+        JScrollPane scroll = new JScrollPane(ta);
+        scroll.setBounds(10, 50, 460, 180);
+        rightPanel.add(scroll);
+
+        // 하단 입력창 (2개) + 버튼
+        JTextField bottomField1 = new JTextField();
+        bottomField1.setBounds(10, 250, 180, 30);
+        rightPanel.add(bottomField1);
+        JTextField bottomField2 = new JTextField();
+        bottomField2.setBounds(200, 250, 120, 30);
+        rightPanel.add(bottomField2);
+
+        JButton bottomBtn = new JButton();
+        bottomBtn.setText("");
+        bottomBtn.setBackground(new Color(210, 240, 250));
+        bottomBtn.setBounds(330, 250, 100, 30);
+        rightPanel.add(bottomBtn);
+
+        // 패널 조립
+        bgPanel.add(btnPanel);
+        bgPanel.add(title);
+        bgPanel.add(rightPanel);
+
+        f.setContentPane(bgPanel);
+        f.setVisible(true);
+    }
+}

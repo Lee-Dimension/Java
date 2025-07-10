@@ -1,0 +1,239 @@
+package DesignGrade;
+
+import java.util.*;
+import javax.swing.*;
+import static java.lang.System.out;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+
+
+class Student {
+    String name;
+    int korean;
+    int english;
+    int math;
+
+    public Student(String name, int korean, int english, int math) {
+        this.name = name;
+        this.korean = korean;
+        this.english = english;
+        this.math = math;
+    }
+}
+
+public class DesignGrade {
+    Scanner sc = new Scanner(System.in);
+    ArrayList<Student> students = new ArrayList<>();
+
+    // 입력
+    public void inputMethod() {
+        out.println("===========입력===========");
+        out.print("이름을 입력하세요 : ");
+        String name = sc.next();
+
+        out.print("국어점수를 입력하세요 : ");
+        int korean = sc.nextInt();
+
+        out.print("영어점수를 입력하세요 : ");
+        int english = sc.nextInt();
+
+        out.print("수학점수를 입력하세요 : ");
+        int math = sc.nextInt();
+
+        students.add(new Student(name, korean, english, math));
+        out.println("저장완료");
+    }
+
+    // 출력
+    public void outputMethod() {
+        while (true) {
+            out.println("===========출력===========");
+            out.println("(1):전체출력\n(2):과목출력\n(3):돌아가기");
+            out.print("선택 : ");
+            int select = sc.nextInt();
+            if (select == 1) {
+                for (Student s : students) {
+                    out.println("---------------------------");
+                    out.println("이름 : " + s.name
+                            + "\n국어점수 : " + s.korean
+                            + "\n영어점수 : " + s.english
+                            + "\n수학점수 : " + s.math);
+                }
+            } else if (select == 2) {
+                out.print("어떤 과목을 출력하시겠습니까? (국어/영어/수학): ");
+                String selectSub = sc.next();
+                if (!selectSub.equals("국어") && !selectSub.equals("영어") && !selectSub.equals("수학")) {
+                    out.println("과목명을 정확히 입력해주세요.");
+                    continue;
+                }
+                for (Student s : students) {
+                    if (selectSub.equals("국어"))
+                        out.println("이름 : " + s.name + "\n국어점수 : " + s.korean);
+                    else if (selectSub.equals("영어"))
+                        out.println("이름 : " + s.name + "\n영어점수 : " + s.english);
+                    else
+                        out.println("이름 : " + s.name + "\n수학점수 : " + s.math);
+                }
+            } else if (select == 3) {
+                break;
+            } else {
+                out.println("잘못 선택하셨습니다.");
+            }
+        }
+    }
+
+    // 검색
+    public void searchMethod() {
+        while (true) {
+            out.println("===========검색===========");
+            out.println("(1):이름으로 검색\n(2):평균으로 검색\n(3):돌아가기");
+            out.print("선택 : ");
+            int select = sc.nextInt();
+            if (select == 1) {
+                out.print("검색할 이름을 입력하세요 : ");
+                String stuName = sc.next();
+                boolean found = false;
+                for (Student s : students) {
+                    if (s.name.equals(stuName)) {
+                        out.println("이름 : " + s.name
+                                + "\n국어점수 : " + s.korean
+                                + "\n영어점수 : " + s.english
+                                + "\n수학점수 : " + s.math);
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    out.println("검색 결과가 없습니다.");
+                }
+            } else if (select == 2) {
+                out.print("평균 몇 점 이상을 검색하시겠습니까? ");
+                int stuMean = sc.nextInt();
+                // 평균 이상 학생만 리스트에 담기
+                ArrayList<Student> filtered = new ArrayList<>();
+                for (Student s : students) {
+                    double avg = (s.korean + s.english + s.math) / 3.0;
+                    if (avg >= stuMean) {
+                        filtered.add(s);
+                    }
+                }
+                // 평균 내림차순 정렬
+                Collections.sort(filtered, (a, b) -> {
+                    double avgA = (a.korean + a.english + a.math) / 3.0;
+                    double avgB = (b.korean + b.english + b.math) / 3.0;
+                    return Double.compare(avgB, avgA);
+                });
+                // 출력
+                if (filtered.isEmpty()) {
+                    out.println("조건에 맞는 학생이 없습니다.");
+                } else {
+                    for (Student s : filtered) {
+                        double avg = (s.korean + s.english + s.math) / 3.0;
+                        out.println("평균이 높은 학생부터 출력합니다.");
+                        out.println("이름 : " + s.name
+                                + "\n국어점수 : " + s.korean
+                                + "\n영어점수 : " + s.english
+                                + "\n수학점수 : " + s.math
+                                + "\n평균 : " + avg);
+                    }
+                }
+            } else if (select == 3) {
+                break;
+            } else {
+                out.println("잘못 선택하셨습니다.");
+            }
+        }
+    }
+
+    // 삭제
+    public void delete() {
+        out.print("삭제하려는 학생이름을 입력하세요 : ");
+        String stuName = sc.next();
+        boolean found = false;
+        Iterator<Student> iter = students.iterator(); //안전하게 삭제할 수 있게 해줌
+        while (iter.hasNext()) {
+            Student s = iter.next();
+            if (s.name.equals(stuName)) {
+                iter.remove();
+                out.println("삭제하였습니다.");
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            out.println("해당 이름의 학생이 없습니다.");
+        }
+    }
+
+    public static void main(String[] args) {
+    	DesignGrade gd = new DesignGrade();
+		JFrame f = new JFrame();
+		JLabel l = new JLabel();
+		
+		f.setTitle("성적 입출력 처리기"); 
+		
+	    // --- 왼쪽 버튼 패널 ---
+	    JPanel btnPanel = new JPanel();
+	    btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.Y_AXIS));
+	    JButton btnInput = new JButton("입력");
+	    JButton btnOutput = new JButton("출력");
+	    JButton btnSearch = new JButton("검색");
+	    JButton btnDelete = new JButton("삭제");
+	    btnPanel.add(btnInput);
+	    btnPanel.add(btnOutput);
+	    btnPanel.add(btnSearch);
+	    btnPanel.add(btnDelete);
+
+	    f.add(btnPanel, BorderLayout.WEST);
+
+
+		JPanel cardPanel = new JPanel(new CardLayout());
+
+		JPanel inputPanel = new JPanel();    // 입력 화면 구성
+		inputPanel.add(new JLabel("입력화면"));
+		JPanel outputPanel = new JPanel();   // 출력 화면 구성
+		outputPanel.add(new JLabel("출력화면"));
+		JPanel searchPanel = new JPanel();   // 검색 화면 구성
+		searchPanel.add(new JLabel("검색화면"));
+		JPanel deletePanel = new JPanel();   // 삭제 화면 구성
+		deletePanel.add(new JLabel("삭제화면"));
+		
+		cardPanel.add(inputPanel, "INPUT");
+		cardPanel.add(outputPanel, "OUTPUT");
+		cardPanel.add(searchPanel, "SEARCH");
+		cardPanel.add(deletePanel, "DELETE");
+
+
+		f.add(cardPanel, BorderLayout.CENTER);
+		
+		CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+		
+		btnInput.addActionListener(e -> cardLayout.show(cardPanel, "INPUT"));
+		btnOutput.addActionListener(e -> cardLayout.show(cardPanel, "OUTPUT"));
+		btnSearch.addActionListener(e -> cardLayout.show(cardPanel, "SEARCH"));
+		btnDelete.addActionListener(e -> cardLayout.show(cardPanel, "DELETE"));
+		
+        f.setSize(800, 500);
+        f.setVisible(true);
+		
+		
+		
+        while (true) {
+            out.println("=========성적 관리 시스템=========");
+            out.println("(1):입력\n(2):출력\n(3):검색\n(4):삭제\n(5):종료");
+            out.print("선택 : ");
+            int select = gd.sc.nextInt();
+
+            if (select == 1) gd.inputMethod();
+            else if (select == 2) gd.outputMethod();
+            else if (select == 3) gd.searchMethod();
+            else if (select == 4) gd.delete();
+            else if (select == 5) {
+                out.println("종료합니다.");
+                return;
+            } else {
+                out.println("잘못 선택하셨습니다.");
+            }
+        }
+    }
+}

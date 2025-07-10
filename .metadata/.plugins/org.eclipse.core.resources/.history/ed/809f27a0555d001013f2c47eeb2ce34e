@@ -1,0 +1,20 @@
+package DesignGrade;
+
+import java.util.*;
+
+public class StudentManager {
+    private static final ArrayList<Student> students = new ArrayList<>();
+    public static ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public static void addStudent(Student s) {
+        students.add(s);
+    }
+
+    public static void removeByName(String name) {
+        students.removeIf(s -> s.name.equals(name));
+    }
+
+    // 기타 필요 함수(검색 등) 추가 가능
+}

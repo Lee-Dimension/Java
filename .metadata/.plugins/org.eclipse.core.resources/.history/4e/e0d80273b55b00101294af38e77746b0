@@ -1,0 +1,15 @@
+package day12;
+import java.util.*;
+
+public class HashSet1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String[] str = {"Java", "Beans", "Java", "XML"};
+		
+		HashSet<String> hs1 = new HashSet<String>();
+		HashSet
+		
+	}
+
+}

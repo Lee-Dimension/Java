@@ -1,0 +1,105 @@
+package NumberBaseBall;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class NumberBaseBall2{
+	
+	// 중복 검사 함수
+	public static boolean isInArray(int[] arr, int num) {
+	    for (int i = 0; i < arr.length; i++) {
+	        if (arr[i] == num) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		HashSet<String> generated = new HashSet<>(); 
+		int randomNumber1 = (int)(Math.random() * 10);
+		int randomNumber2 = (int)(Math.random() * 10);
+		do {
+		    randomNumber2 = (int)(Math.random() * 10);
+		} while (randomNumber2 == randomNumber1);
+
+		
+		int randomNumber3 = (int)(Math.random() * 10);
+		do {
+		    randomNumber3 = (int)(Math.random() * 10);
+		} while (randomNumber3 == randomNumber1 || randomNumber3 == randomNumber2);
+		
+		System.out.println("정답 : "+randomNumber1+""+randomNumber2+""+randomNumber3);
+		int inputNum1=0,inputNum2 = 0,inputNum3=0;
+		
+		int [] correct = {randomNumber1,randomNumber2, randomNumber3};
+		System.out.println("야구게임 시작!");
+		System.out.println("랜덤한 숫자 3자리가 준비되었습니다. 정답을 맞춰보겠습니다.");
+		
+		int predictNumber1,predictNumber2,predictNumber3;
+		int [] dontUse = new int[100];
+		Arrays.fill(dontUse, -1);
+		int inNum = 0;
+		for(int round=0; round<1000; round++) {
+			System.out.println("------------------------------------");
+			System.out.println((round+1)+"라운드");
+			int strike = 0;
+			int ball = 0;
+			int [] predict = new int[3];
+			while (true) {
+			    // 1. 중복 없는 세 숫자 생성
+			    do {
+			        predictNumber1 = (int)(Math.random() * 10);
+			    } while (isInArray(dontUse, predictNumber1));
+
+			    do {
+			        predictNumber2 = (int)(Math.random() * 10);
+			    } while (predictNumber2 == predictNumber1 || isInArray(dontUse, predictNumber2));
+
+			    do {
+			        predictNumber3 = (int)(Math.random() * 10);
+			    } while (predictNumber3 == predictNumber1 || predictNumber3 == predictNumber2 || isInArray(dontUse, predictNumber3));
+
+			    // 2. 조합 키 생성
+			    String key = predictNumber1 + "," + predictNumber2 + "," + predictNumber3;
+
+			    // 3. 조합 중복이면 건너뜀
+			    if (generated.contains(key)) continue;
+
+			    // 4. 중복 아니면 저장 + 출력
+			    generated.add(key);
+			    predict[0] = predictNumber1
+			    predict[1] = predictNumber2, 
+			    predict[2] =			redictNumber3};
+			    System.out.println("예측 : " + predictNumber1 + "" + predictNumber2 + "" + predictNumber3);
+			    System.out.println("생성된 조합: " + key);
+			}
+			
+			for (int i = 0; i < 3; i++) {
+			    if (predict[i] == correct[i]) {
+			        strike++;
+			    } else if (predict[i] == correct[0] || predict[i] == correct[1] || predict[i] == correct[2]) {
+			        ball++;
+			    }
+			    if (strike == 3) {
+			    	System.out.println("정답을 맞췄습니다!");
+			    	return;
+			    }
+			}
+			System.out.println(strike + "스트라이크, " + ball + "볼\n");
+			if(strike==0 && ball==0) {
+				for(int j=0; j<3; j++) {
+					dontUse[inNum] = predict[j];
+					inNum++;
+				}
+			}
+		}		
+		System.out.println("맞추기를 실패했습니다.");
+		return;
+	}	
+}
+
+

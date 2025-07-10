@@ -1,0 +1,30 @@
+package day13;
+
+import java.awt.*;
+
+public class CardLayoutEx {
+	CardLayout card;
+	Panel first_panel, scondPanel, third_panel;
+	
+	public CardLayoutEx() {
+		super("CardLayout");
+		
+		card = new CardLayout();
+		setLayout(card);
+		
+		first_panel = new Panel();
+		first_panel.add(new Button("1"));	first_panel.add(new Button("2"));
+		
+		second_panel = new Panel();
+		second_pane1.add(new Button("3"));	second_panel.add(new Button("4"));
+		
+		third_panel = new Panel();
+		third_panel.add(new Button("5"));	third_panel.add(new Button("6"));
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

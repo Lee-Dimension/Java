@@ -1,0 +1,14 @@
+package day12;
+
+public class Stack1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String[] groupA = {"우즈베키스탄","쿠웨이트"};
+		
+		for(int i : groupA) {
+			
+		}
+	}
+
+}

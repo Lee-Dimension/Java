@@ -1,0 +1,57 @@
+package SalaryManagementProject;
+
+public class Employees {
+	private int MAX = 50;
+	Cemployee[] cemp = new Cemployee[MAX];
+	protected int count = 0;
+
+    public Employees() {
+        cemp[0] = new Cemployee(); 
+        cemp[0].setName("이차원");
+        cemp[0].setNum(0001);
+        cemp[0].setDepartment("인사팀");
+        cemp[0].setPosition("사원");
+        cemp[0].setBasicSalary(4500000);
+        cemp[0].setManager(true);
+        count++;
+    }
+	public class CalcResult {
+		Bonus bn = new Bonus();
+		
+		public void calcOverPay(int i){
+			int timePay = cemp[i].getBasicSalary()/180;	//시급
+			//연장 근무 급여 계산
+			int overPay = bn.bonus(timePay, cemp[i].getOverTime(), 1.5);
+			cemp[i].setOverPay(overPay);
+		}
+		public void calcNightPay(int i) {
+			int timePay = cemp[i].getBasicSalary()/180;	//시급
+			//야간 근무 급여 계산
+			int nightPay = bn.bonus(timePay, cemp[i].getNightTime(), 0.5);
+			cemp[i].setNightPay(nightPay);
+		}
+		public void calcHoliPay(int i) {
+			int timePay = cemp[i].getBasicSalary()/180;	//시급
+			//휴일 근무 급여 계산
+			int holiPay = bn.bonus(timePay, cemp[i].getHoliTime(), 1.5);
+			cemp[i].setHoliPay(holiPay);
+		}
+		//세금 계산
+		Tax tx = new Tax();
+		public int calcTax(int i) {
+			int amount = cemp[i].getBasicSalary() + cemp[i].getOverPay() + cemp[i].getNightPay() + cemp[i].getHoliPay();
+			int tax = tx.tax(amount);
+			cemp[i].setTax(tax);
+		}
+		//총 급여 계산
+		public void totalSalary(int i) {
+			int amount = cemp[i].getBasicSalary() + cemp[i].getOverPay() + cemp[i].getNightPay() + cemp[i].getHoliPay();
+			int totalSalary = amount - calcTax(i);
+		}
+		
+		
+	}
+}
+	
+
+

@@ -1,0 +1,95 @@
+package day12;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class GradeArrayList {
+	Scanner sc = new Scanner(System.in);
+	ArrayList<String> name = new ArrayList<String>();
+	ArrayList<Integer> korean = new ArrayList<Integer>();
+	ArrayList<Integer> english = new ArrayList<Integer>();	
+	ArrayList<Integer> math = new ArrayList<Integer>();	
+	
+	//입력받기
+	public void inputMethod() {
+		System.out.print("이름을 입력하세요 : ");
+		name.add(sc.next());
+		
+		System.out.print("국어점수를 입력하세요 : ");
+		korean.add(sc.nextInt());
+		
+		System.out.print("영어점수를 입력하세요 : ");
+		english.add(sc.nextInt());
+		
+		System.out.print("수학점수를 입력하세요 : ");
+		math.add(sc.nextInt());
+		
+		System.out.println("저장완료");		
+	}
+	
+	//출력하기
+	public void outputMethod() {
+		while(true) {
+			System.out.print("(1):전체출력\n(2):과목출력\n(3):돌아가기");
+			int select = sc.nextInt();
+			for(int i=0; i<name.size();i++) {
+				if(select == 1) {
+					System.out.println("이름 : " + name.get(i)+"\n국어점수 : "+ korean.get(i)+"\t영어점수 : "
+							+ english.get(i)+"\t수학점수 : "+math.get(i));
+				}
+			}
+			if(select == 2) {
+				System.out.println("---------------------\n국어\t영어\t수학\n---------------------");
+				System.out.print("어떤 과몸을 출력하시겠습니까?");
+				String selectSub = sc.next();
+				if(selectSub == "국어") {
+					for(int i=0; i<name.size();i++) {
+						System.out.println("이름 : " + name.get(i)+"\n국어점수 : "+ korean.get(i));
+					}
+				}else if(selectSub == "영어") {
+					for(int i=0; i<name.size();i++) {
+						System.out.println("이름 : " + name.get(i)+"\n영어점수 : "+ english.get(i));
+					}
+				}else if(selectSub == "수학") {
+					for(int i=0; i<name.size();i++) {
+						System.out.println("이름 : " + name.get(i)+"\n수학점수 : "+ math.get(i));
+					}
+				}else {
+					System.out.println("과목명을 입력해주세요.");
+					continue;
+				}
+			}
+			if(select == 3) {
+				break;
+			}
+				
+		}
+	}
+	
+	
+	//검색
+	
+	
+	//삭제
+	
+	
+	//종료
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GradeArrayList gd = new GradeArrayList();
+
+		while(true) {
+			System.out.println("(1):입력\n(2):출력\n(3):검색\n(4):삭제\n(5):종료");
+			System.out.print("선택 : ");
+			int select = gd.sc.nextInt();
+			
+			if(select==1) { gd.inputMethod(); continue;}
+			else if(select==2) { gd.outputMethod(); continue; }
+			
+			else if(select==5) { System.out.println("종료합니다."); return; }
+		}
+	}
+}

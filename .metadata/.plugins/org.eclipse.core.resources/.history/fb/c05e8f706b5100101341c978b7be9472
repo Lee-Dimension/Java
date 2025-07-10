@@ -1,0 +1,16 @@
+
+public class Loop {
+
+	public static void main(String[] args) {
+	
+		int foldCount= 0;
+		int rectCount = 0;
+		for(;rectCount<=500; foldCount++) {
+			rectCount *= 2;
+		    
+		}
+			System.out.println("접은 횟수 : " + foldCount);
+			System.out.println("사각형 개수 : " + rectCount);
+	}
+
+}

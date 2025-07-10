@@ -1,0 +1,42 @@
+package NumberBaseBall;
+
+import java.util.*;
+
+public class NumberBaseBall21 {
+	int [][] possibleCombi = new int[720][3];
+	int count = 0;
+	
+	for(int i=0; i<10; i++) {
+		for(int j=0; j<10; j++) {
+			if(j==1) continue;
+			for(int k=0; k<10; k++) {
+				if(k==i || k==j) continue;
+				possibleCombi[count][0] = i;
+				possibleCombi[count][1] = i;
+				possibleCombi[count][2] = i;
+			}
+		}
+	}
+	
+	
+
+    public static void main(String[] args) {
+        Random rand = new Random();
+        int totalTries = 0;
+        int rounds = 100;
+        int maxTries = 0;
+        int minTries = 100;
+
+        for (int i = 0; i < rounds; i++) {
+            int tries = simulate(rand, false);
+            totalTries += tries;
+            if (tries > maxTries) maxTries = tries;
+            if (tries < minTries) minTries = tries;
+        }
+
+        System.out.println("100번 자동실행 결과");
+        System.out.println("평균 시도 횟수: " + ((double)totalTries/rounds));
+        System.out.println("최소: " + minTries + "번, 최대: " + maxTries + "번");
+
+    }
+}

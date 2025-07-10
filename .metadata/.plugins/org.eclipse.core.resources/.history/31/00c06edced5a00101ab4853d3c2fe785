@@ -1,0 +1,19 @@
+package day9;
+
+public class Exam1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String num1 = "1";
+		int num2 = 0;
+		
+		try {
+			int result = num1 + num2;
+		}catch(NumberFormatException e) {
+			System.out.println("");
+		}catch(ArithmeticException e) {
+			
+		}
+	}
+
+}

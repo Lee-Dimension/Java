@@ -1,0 +1,11 @@
+package DesignGrade;
+
+import java.awt.Color;
+
+public class Colors {
+    public static final Color BACKGROUND_PINK = new Color(255, 220, 220);
+    public static final Color BUTTON_BLUE = new Color(60, 140, 240);
+    public static final Color BUTTON_TEXT = Color.WHITE;
+    public static final Color TITLE_SKY = new Color(210, 240, 250);
+    // 필요 색 계속 추가
+}

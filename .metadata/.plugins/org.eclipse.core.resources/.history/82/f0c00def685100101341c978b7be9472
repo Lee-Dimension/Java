@@ -1,0 +1,13 @@
+
+public class Loop {
+
+	public static void main(String[] args) {
+	
+		for(int i=0, s=1; s<500; i++, s=s*2) {
+			
+		}
+			System.out.println("접은 횟수 : " + i);
+			System.out.println("사각형 개수 : " + i);
+	}
+
+}

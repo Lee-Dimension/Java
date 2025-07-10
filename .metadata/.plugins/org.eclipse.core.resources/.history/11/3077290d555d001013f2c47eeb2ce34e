@@ -1,0 +1,291 @@
+package DesignGrade;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.*;
+
+public class GradeGUI {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("성적 처리기");
+        f.setSize(400,300);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // X 버튼 동작하게 만듬
+        f.setMinimumSize(new Dimension(500, 360));
+        
+	        //버튼 담는 패널
+	        JPanel btnPanel = new JPanel();
+	        btnPanel.setBackground(new Color(255, 200, 210)); // 핫핑크
+	        btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.Y_AXIS));
+	        btnPanel.setBorder(new EmptyBorder(30, 20, 30, 20)); 
+        
+		        //입력버튼
+		        JButton btnInput = new JButton("입력");
+		        btnInput.setBackground(new Color(210, 240, 250)); //연하늘
+		        btnInput.setPreferredSize(new Dimension(120, 40)); //버튼 크기 조절
+		        btnInput.setMaximumSize(new Dimension(120, 60));//버튼 최대 크기
+		        btnPanel.add(btnInput);
+		        btnPanel.add(Box.createVerticalGlue());       
+		        //출력버튽
+		        JButton btnOutput = new JButton("출력");
+		        btnOutput.setBackground(new Color(210, 240, 250)); //연하늘
+		        btnOutput.setPreferredSize(new Dimension(120, 40)); //버튼 크기 조절
+		        btnOutput.setMaximumSize(new Dimension(120, 60));//버튼 최대 크기
+		        btnPanel.add(btnOutput);
+		        btnPanel.add(Box.createVerticalGlue());       
+		        
+		        JButton btnSearch = new JButton("검색");
+		        btnSearch.setBackground(new Color(210, 240, 250)); //연하늘
+		        btnSearch.setPreferredSize(new Dimension(120, 40)); //버튼 크기 조절
+		        btnSearch.setMaximumSize(new Dimension(120, 60));//버튼 최대 크절
+		        btnPanel.add(btnSearch);
+		        btnPanel.add(Box.createVerticalGlue());       
+		
+		        //삭제버튼
+		        JButton btnDelete = new JButton("삭제");
+		        btnDelete.setBackground(new Color(210, 240, 250)); //연하늘
+		        btnDelete.setPreferredSize(new Dimension(120, 40)); //버튼 크기 조절
+		        btnDelete.setMaximumSize(new Dimension(120, 60));//버튼 최대 크기
+		        btnPanel.add(btnDelete);
+		        
+	        //프레임에 버튼 패널 츠가
+	        f.add(btnPanel, BorderLayout.WEST);
+
+	        //오른족 화면
+	        JPanel RightCard = new JPanel(new CardLayout());
+	        RightCard.setBackground(new Color(255, 220, 220)); // 연핑크
+	        RightCard.setBorder(new EmptyBorder(30, 20, 30, 20)); 
+	        f.add(RightCard, BorderLayout.EAST);
+
+		        // 입력 패널 
+		        JPanel inputPanel = new JPanel();
+		        inputPanel.setBackground(new Color(255, 220, 220));
+		        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+	
+			        // 제목(박스 맨 위)
+			        JLabel inputLabel = new JLabel("입력", SwingConstants.CENTER);
+			        inputLabel.setBorder(new EmptyBorder(2, 20, 2, 20)); 
+			        inputLabel.setOpaque(true);
+			        inputLabel.setBackground(new Color(210, 240, 250)); //연하늘
+			        inputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			        inputLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+			        inputLabel.setPreferredSize(new Dimension(100, 40));
+			        inputPanel.add(inputLabel);
+			        inputPanel.add(Box.createVerticalStrut(10));
+			
+			        // 입력받는 그리드 패널(박스 중간)
+			        JPanel inMiddle = new JPanel(new GridLayout(4, 2, 10, 10));
+			        inMiddle.setBackground(new Color(255, 220, 220)); // 연핑크
+				        inMiddle.add(new JLabel("이름"));
+				        inMiddle.add(new JTextField(15));
+				        inMiddle.add(new JLabel("국어점수"));
+				        inMiddle.add(new JTextField(5));
+				        inMiddle.add(new JLabel("영어점수"));
+				        inMiddle.add(new JTextField(5));
+				        inMiddle.add(new JLabel("수학점수"));
+				        inMiddle.add(new JTextField(5));
+			        inputPanel.add(inMiddle);
+			
+			        // 저장버튼(박스 맨아래)
+			        JButton saveBtn = new JButton("저장");
+			        saveBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+			        inputPanel.add(Box.createVerticalStrut(10));
+			        inputPanel.add(saveBtn);
+	
+		        // 오른쪽 패널에 넣기
+			    RightCard.add(inputPanel);
+	        
+	        //출력패널
+	        JPanel outputPanel = new JPanel();
+	        outputPanel.setBackground(new Color(255, 220, 220)); // 연핑크
+	        outputPanel.setLayout(new BoxLayout(outputPanel, BoxLayout.Y_AXIS));
+	        
+		        // 제목(박스 맨 위)
+		        JLabel outputLabel = new JLabel("출력", SwingConstants.CENTER);
+		        outputLabel.setBorder(new EmptyBorder(2, 20, 2, 20)); 
+		        outputLabel.setOpaque(true);
+		        outputLabel.setBackground(new Color(210, 240, 250)); //연하늘
+		        outputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		        outputLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+		        outputLabel.setPreferredSize(new Dimension(100, 40));
+		        outputPanel.add(outputLabel);
+		        outputPanel.add(Box.createVerticalStrut(10));
+		        
+		        //버튼은 왼쪽, 출력창은 오른쪽에 담을 패널
+		        JPanel outMiddle = new JPanel(new BorderLayout());
+		        outMiddle.setBackground(new Color(255, 220, 220)); // 연핑크
+
+		        	//출력 패널에서 왼쪽에 있을 버튼
+		        	JPanel outMidBtn = new JPanel(new GridLayout(4, 1, 10, 10));
+		        	outMidBtn.setBackground(new Color(255, 220, 220)); // 연핑크
+		        	
+		        	JButton btnAll = new JButton("전체출력");
+		        	btnAll.setBackground(new Color(210, 240, 250)); // 흰색
+		        	outMidBtn.add(btnAll);
+		  
+		        	JButton btnKor = new JButton("국어출력");
+		        	btnKor.setBackground(new Color(210, 240, 250)); // 흰색
+		        	outMidBtn.add(btnKor);
+		        	
+		        	JButton btnEng = new JButton("영어출력");
+		        	btnEng.setBackground(new Color(210, 240, 250)); // 흰색
+		        	outMidBtn.add(btnEng);
+		        	
+		        	JButton btnMat = new JButton("수학출력");
+		        	btnMat.setBackground(new Color(210, 240, 250)); // 흰색
+		        	outMidBtn.add(btnMat);
+		        	
+		        	outMiddle.add(outMidBtn, BorderLayout.WEST);
+		        	
+		        	//출력 패널의 오른쪼겡 있을 출력창
+		        	JTextField outputField = new JTextField(15);
+		        	outputField.setBackground(new Color(255, 255, 255)); // 흰색
+		        	outputField.setEditable(false); //입력 못하게 막음
+		        	outMiddle.add(outputField,BorderLayout.EAST);
+		        
+			    outputPanel.add(outMiddle);
+
+	        //검색패널               	
+	        JPanel searchPanel = new JPanel();
+	        searchPanel.setBackground(new Color(255, 220, 220)); // 연핑크
+	        searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.Y_AXIS));
+		        // 제목(박스 맨 위)
+		        JLabel searchLabel = new JLabel("검색", SwingConstants.CENTER);
+		        searchLabel.setBorder(new EmptyBorder(2, 20, 2, 20)); 
+		        searchLabel.setOpaque(true);
+		        searchLabel.setBackground(new Color(210, 240, 250)); //연하늘
+		        searchLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		        searchLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+		        searchLabel.setPreferredSize(new Dimension(100, 40));
+		        searchPanel.add(searchLabel);
+		        searchPanel.add(Box.createVerticalStrut(10));
+		        
+		        // 이름 검색, 평균 검색 버튼 넣을 박스
+		        JPanel searchModePanel = new JPanel(new GridLayout(1,2,10,10));
+		        searchModePanel.setBackground(new Color(255, 220, 220)); // 연핑크
+		        	//이름 버튼
+			        JButton nameBtn = new JButton("이름");
+			        nameBtn.setBackground(new Color(210, 240, 250)); //연하늘
+			        searchModePanel.add(nameBtn);
+			        //평균 버튼
+			        JButton meanBtn = new JButton("평균");
+			        meanBtn.setBackground(new Color(210, 240, 250)); //연하늘
+			        searchModePanel.add(meanBtn);
+			        
+			        searchPanel.add(searchModePanel);
+		        
+			        // 이름 버튼으로 들어간 이름 검색 모드
+			        JPanel searchCard = new JPanel(new CardLayout());
+			        searchCard.setBackground(new Color(255, 220, 220)); // 연핑크
+			        searchCard.setBorder(new EmptyBorder(30, 20, 30, 20)); 
+			        searchPanel.add(searchCard, BorderLayout.SOUTH);
+			        
+			        	//카드 (3,4층) 담을 이름 박스 레이아웃
+			        	JPanel searchNameBox = new JPanel();
+			        	searchNameBox.setBackground(new Color(255, 220, 220)); // 연핑크
+			        	searchNameBox.setLayout(new BoxLayout(searchNameBox, BoxLayout.Y_AXIS));
+			        	
+				    		//이름라벨, 검색창, 출력버튼을 담을 그리드 레이아웃
+				        	JPanel nameGrid = new JPanel(new GridLayout(1,3,10,10));
+				        	nameGrid.setBackground(new Color(255, 220, 220)); // 연핑크
+					        
+					        	//이름라벨
+				        		JLabel nameLabel = new JLabel("이름", SwingConstants.CENTER);
+				        		nameGrid.add(nameLabel);
+				        		//검색창
+				        		JTextField nameField = new JTextField();
+				        		nameGrid.add(nameField);
+				        		//출력버튼
+				        		JButton nameButton = new JButton("확인");
+				        		nameGrid.add(nameButton);
+				        		
+				        		searchNameBox.add(nameGrid);
+				        	
+				    		//출력박스
+				        	JTextField outPutField1 = new JTextField();
+				        	outPutField1.setEditable(false); //입력 못하게 막음
+				        	searchNameBox.add(outPutField1);
+				        	
+					     //카드 (3,4층) 담을 평균 박스 레이아웃    	
+			        	JPanel searchMeanBox = new JPanel();
+			        	searchMeanBox.setBackground(new Color(255, 220, 220)); // 연핑크
+			        	searchMeanBox.setLayout(new BoxLayout(searchMeanBox, BoxLayout.Y_AXIS));
+			        	
+				    		//이름라벨, 검색창, 출력버튼을 담을 그리드 레이아웃
+				        	JPanel  meanGrid = new JPanel(new GridLayout(1,3,10,10));
+				        	meanGrid.setBackground(new Color(255, 220, 220)); // 연핑크
+					        
+					        	//평균라벨
+				        		JLabel meanLabel = new JLabel("평균", SwingConstants.CENTER);
+				        		meanGrid.add(meanLabel);
+				        		//검색창
+				        		JTextField meanField = new JTextField();
+				        		meanGrid.add(meanField);
+				        		//출력버튼
+				        		JButton meanButton = new JButton("확인");
+				        		meanGrid.add(meanButton);
+				        		
+				        		searchMeanBox.add(meanGrid);
+				        	
+				    		//출력박스
+				        	JTextField outPutField2 = new JTextField();
+				        	outPutField2.setEditable(false); //입력 못하게 막음
+				        	searchMeanBox.add(outPutField2);				
+					        					        					
+				        	
+			        	searchCard.add(searchNameBox, "NAME");
+			        	searchCard.add(searchMeanBox, "MEAN");
+				        	
+				        CardLayout searchcardLayout = (CardLayout) searchCard.getLayout();
+				        nameBtn.addActionListener(e -> searchcardLayout.show(searchCard,"NAME"));
+				        meanBtn.addActionListener(e -> searchcardLayout.show(searchCard,"MEAN"));
+			        		    
+				           	
+		    //삭제패널
+	        JPanel deletePanel = new JPanel();
+	        deletePanel.setBackground(new Color(255, 220, 220)); // 연핑크
+	        deletePanel.setLayout(new BoxLayout(deletePanel, BoxLayout.Y_AXIS));
+		        // 제목(박스 맨 위)
+		        JLabel deleteLabel = new JLabel("삭제", SwingConstants.CENTER);
+		        deleteLabel.setBorder(new EmptyBorder(2, 20, 2, 20)); 
+		        deleteLabel.setOpaque(true);
+		        deleteLabel.setBackground(new Color(210, 240, 250)); //연하늘
+		        deleteLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		        deleteLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+		        deleteLabel.setPreferredSize(new Dimension(100, 40));
+		        deletePanel.add(deleteLabel);
+		        deletePanel.add(Box.createVerticalStrut(80));
+		        		        		        		        
+		        //이름 입력창(박스 중간)
+		        JPanel delInputName = new JPanel(new GridLayout(1,2,10,10));
+		        delInputName.setBackground(new Color(255, 220, 220));
+		        
+		        	JLabel delName = new JLabel("이름", SwingConstants.CENTER);
+		        	delInputName.add(delName);
+		        	
+		        	JTextField delInput = new JTextField(10);
+		        	delInputName.add(delInput);
+		        deletePanel.add(delInputName);
+		        deletePanel.add(Box.createVerticalStrut(80));
+		        
+		        //삭제 버튼(박스 끝)
+		        JButton delButton = new JButton("삭제");
+		        deletePanel.add(delButton);
+		        
+		    RightCard.add(inputPanel, "INPUT");
+	        RightCard.add(searchPanel, "SEARCH");
+	        RightCard.add(outputPanel, "OUTPUT");
+	        RightCard.add(deletePanel, "DELETE");
+
+        f.add(RightCard, BorderLayout.CENTER);
+
+        CardLayout cardLayout = (CardLayout) RightCard.getLayout();
+
+        btnInput.addActionListener(e -> cardLayout.show(RightCard, "INPUT"));
+        btnSearch.addActionListener(e -> cardLayout.show(RightCard, "SEARCH"));
+        btnOutput.addActionListener(e -> cardLayout.show(RightCard, "OUTPUT"));
+        btnDelete.addActionListener(e -> cardLayout.show(RightCard, "DELETE"));
+
+ 
+        f.setVisible(true);       
+    }
+}

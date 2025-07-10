@@ -1,0 +1,19 @@
+package day13;
+
+import javax.swing.*;
+
+public class SwingEx1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		JFrame f = new JFrame();
+		JButton btn = new JButton("버튼1");
+		
+		btn.setText("클릭");
+		
+		
+        f.add(btn);
+        f.setSize(200, 100);
+        f.setVisible(true);
+	}
+}

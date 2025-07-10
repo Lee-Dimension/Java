@@ -1,0 +1,20 @@
+package SalaryManagementProject;
+
+public class User extends Manager{
+	@Override
+	public void inquire() {
+		System.out.println("====================================");
+		System.out.print("사원 번호 : ");
+		
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("====================================");
+		System.out.print("본인의 사원 번호를 입력하세요 : ");
+
+	}
+
+}

@@ -1,0 +1,187 @@
+package DesignGrade;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+
+class Student {
+    String name;
+    int korean;
+    int english;
+    int math;
+
+    public Student(String name, int korean, int english, int math) {
+        this.name = name;
+        this.korean = korean;
+        this.english = english;
+        this.math = math;
+    }
+}
+
+public class DesignGrade {
+    ArrayList<Student> students = new ArrayList<>();
+
+    public static void main(String[] args) {
+        new DesignGrade().start();
+    }
+
+    void start() {
+        JFrame f = new JFrame("성적 입출력 처리기");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setSize(800, 500);
+        f.setLayout(new BorderLayout());
+
+        // --- 왼쪽 버튼 패널 ---
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.Y_AXIS));
+        JButton btnInput = new JButton("입력");
+        JButton btnOutput = new JButton("출력");
+        JButton btnSearch = new JButton("검색");
+        JButton btnDelete = new JButton("삭제");
+        btnPanel.add(Box.createVerticalStrut(30));
+        btnPanel.add(btnInput);
+        btnPanel.add(Box.createVerticalStrut(20));
+        btnPanel.add(btnOutput);
+        btnPanel.add(Box.createVerticalStrut(20));
+        btnPanel.add(btnSearch);
+        btnPanel.add(Box.createVerticalStrut(20));
+        btnPanel.add(btnDelete);
+        btnPanel.add(Box.createVerticalGlue());
+        f.add(btnPanel, BorderLayout.WEST);
+
+        // --- 오른쪽 카드 패널 ---
+        JPanel cardPanel = new JPanel(new CardLayout());
+
+        // 1. 입력 패널
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+        JTextField tfName = new JTextField(15);
+        JTextField tfKor = new JTextField(5);
+        JTextField tfEng = new JTextField(5);
+        JTextField tfMath = new JTextField(5);
+        JButton btnSave = new JButton("저장");
+        JLabel inputMsg = new JLabel(" ");
+        inputPanel.add(new JLabel("이름:"));
+        inputPanel.add(tfName);
+        inputPanel.add(new JLabel("국어점수:"));
+        inputPanel.add(tfKor);
+        inputPanel.add(new JLabel("영어점수:"));
+        inputPanel.add(tfEng);
+        inputPanel.add(new JLabel("수학점수:"));
+        inputPanel.add(tfMath);
+        inputPanel.add(btnSave);
+        inputPanel.add(inputMsg);
+
+        // 2. 출력 패널
+        JPanel outputPanel = new JPanel(new BorderLayout());
+        JTextArea taOutput = new JTextArea();
+        taOutput.setEditable(false);
+        outputPanel.add(new JScrollPane(taOutput), BorderLayout.CENTER);
+
+        // 3. 검색 패널
+        JPanel searchPanel = new JPanel();
+        searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.Y_AXIS));
+        JTextField tfSearch = new JTextField(15);
+        JButton btnDoSearch = new JButton("이름으로 검색");
+        JTextArea taSearchResult = new JTextArea(7, 30);
+        taSearchResult.setEditable(false);
+        searchPanel.add(new JLabel("검색할 이름 입력:"));
+        searchPanel.add(tfSearch);
+        searchPanel.add(btnDoSearch);
+        searchPanel.add(new JScrollPane(taSearchResult));
+
+        // 4. 삭제 패널
+        JPanel deletePanel = new JPanel();
+        deletePanel.setLayout(new BoxLayout(deletePanel, BoxLayout.Y_AXIS));
+        JTextField tfDelete = new JTextField(15);
+        JButton btnDoDelete = new JButton("삭제");
+        JLabel deleteMsg = new JLabel(" ");
+        deletePanel.add(new JLabel("삭제할 이름 입력:"));
+        deletePanel.add(tfDelete);
+        deletePanel.add(btnDoDelete);
+        deletePanel.add(deleteMsg);
+
+        // 카드 패널에 추가
+        cardPanel.add(inputPanel, "INPUT");
+        cardPanel.add(outputPanel, "OUTPUT");
+        cardPanel.add(searchPanel, "SEARCH");
+        cardPanel.add(deletePanel, "DELETE");
+        f.add(cardPanel, BorderLayout.CENTER);
+
+        CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+
+        // --- 이벤트 연결 ---
+        btnInput.addActionListener(e -> cardLayout.show(cardPanel, "INPUT"));
+        btnOutput.addActionListener(e -> {
+            // 전체 출력
+            StringBuilder sb = new StringBuilder();
+            if (students.isEmpty()) {
+                sb.append("저장된 학생이 없습니다.\n");
+            } else {
+                for (Student s : students) {
+                    sb.append("이름: ").append(s.name)
+                      .append(" / 국어: ").append(s.korean)
+                      .append(" / 영어: ").append(s.english)
+                      .append(" / 수학: ").append(s.math)
+                      .append(" / 평균: ").append(String.format("%.2f", (s.korean + s.english + s.math) / 3.0))
+                      .append("\n");
+                }
+            }
+            taOutput.setText(sb.toString());
+            cardLayout.show(cardPanel, "OUTPUT");
+        });
+        btnSearch.addActionListener(e -> cardLayout.show(cardPanel, "SEARCH"));
+        btnDelete.addActionListener(e -> cardLayout.show(cardPanel, "DELETE"));
+
+        btnSave.addActionListener(e -> {
+            String name = tfName.getText().trim();
+            try {
+                int kor = Integer.parseInt(tfKor.getText().trim());
+                int eng = Integer.parseInt(tfEng.getText().trim());
+                int math = Integer.parseInt(tfMath.getText().trim());
+                if (name.isEmpty()) {
+                    inputMsg.setText("이름을 입력하세요.");
+                    return;
+                }
+                students.add(new Student(name, kor, eng, math));
+                inputMsg.setText("저장 완료!");
+                tfName.setText("");
+                tfKor.setText("");
+                tfEng.setText("");
+                tfMath.setText("");
+            } catch (Exception ex) {
+                inputMsg.setText("점수는 숫자로 입력해야 합니다.");
+            }
+        });
+
+        btnDoSearch.addActionListener(e -> {
+            String target = tfSearch.getText().trim();
+            StringBuilder sb = new StringBuilder();
+            for (Student s : students) {
+                if (s.name.equals(target)) {
+                    sb.append("이름: ").append(s.name)
+                      .append(" / 국어: ").append(s.korean)
+                      .append(" / 영어: ").append(s.english)
+                      .append(" / 수학: ").append(s.math)
+                      .append(" / 평균: ").append(String.format("%.2f", (s.korean + s.english + s.math) / 3.0))
+                      .append("\n");
+                }
+            }
+            if (sb.length() == 0) sb.append("검색 결과 없음.\n");
+            taSearchResult.setText(sb.toString());
+        });
+
+        btnDoDelete.addActionListener(e -> {
+            String target = tfDelete.getText().trim();
+            boolean removed = students.removeIf(s -> s.name.equals(target));
+            if (removed) {
+                deleteMsg.setText("삭제 완료");
+            } else {
+                deleteMsg.setText("해당 이름의 학생이 없습니다.");
+            }
+        });
+
+        f.setVisible(true);
+    }
+}

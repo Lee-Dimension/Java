@@ -1,0 +1,77 @@
+package DesignGrade;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+
+public class GradeGUI {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("성적 처리기");
+        f.setSize(400,300);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setMinimumSize(new Dimension(500, 360));
+        
+        // 버튼 패널(왼쪽)
+        JPanel btnPanel = new JPanel();
+        btnPanel.setBackground(Colors.VIOLET);
+        btnPanel.setLayout(new BoxLayout(btnPanel, BoxLayout.Y_AXIS));
+        btnPanel.setBorder(new EmptyBorder(30, 20, 30, 20));
+        
+	        JButton btnInput = new JButton("입력");
+	        btnInput.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+	        btnInput.setBackground(Colors.YELLOW);
+	        btnInput.setPreferredSize(new Dimension(120, 40));
+	        btnInput.setMaximumSize(new Dimension(120, 60));
+	        btnPanel.add(btnInput);
+	        btnPanel.add(Box.createVerticalGlue());
+	        JButton btnOutput = new JButton("출력");
+	        btnOutput.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+	        btnOutput.setBackground(Colors.YELLOW);
+	        btnOutput.setPreferredSize(new Dimension(120, 40));
+	        btnOutput.setMaximumSize(new Dimension(120, 60));
+	        btnPanel.add(btnOutput);
+	        btnPanel.add(Box.createVerticalGlue());
+	        JButton btnSearch = new JButton("검색");
+	        btnSearch.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+	        btnSearch.setBackground(Colors.YELLOW);
+	        btnSearch.setPreferredSize(new Dimension(120, 40));
+	        btnSearch.setMaximumSize(new Dimension(120, 60));
+	        btnPanel.add(btnSearch);
+	        btnPanel.add(Box.createVerticalGlue());
+	        JButton btnDelete = new JButton("삭제");
+	        btnDelete.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+	        btnDelete.setBackground(Colors.YELLOW);
+	        btnDelete.setPreferredSize(new Dimension(120, 40));
+	        btnDelete.setMaximumSize(new Dimension(120, 60));
+	        btnPanel.add(btnDelete);
+        
+        f.add(btnPanel, BorderLayout.WEST);
+
+        // CardLayout 메인 패널(오른쪽)
+        JPanel RightCard = new JPanel(new CardLayout());
+        RightCard.setBackground(Colors.VIOLET);
+        RightCard.setBorder(new EmptyBorder(30, 20, 30, 20));
+        f.add(RightCard, BorderLayout.CENTER);
+
+        // 각 화면별 패널 객체 생성
+        InputPanel inputPanel = new InputPanel();
+        OutputPanel outputPanel = new OutputPanel();
+        SearchPanel searchPanel = new SearchPanel();
+        DeletePanel deletePanel = new DeletePanel();
+
+        // 카드에 넣기
+        RightCard.add(inputPanel, "INPUT");
+        RightCard.add(searchPanel, "SEARCH");
+        RightCard.add(outputPanel, "OUTPUT");
+        RightCard.add(deletePanel, "DELETE");
+
+        CardLayout cardLayout = (CardLayout) RightCard.getLayout();
+
+        btnInput.addActionListener(e -> cardLayout.show(RightCard, "INPUT"));
+        btnSearch.addActionListener(e -> cardLayout.show(RightCard, "SEARCH"));
+        btnOutput.addActionListener(e -> cardLayout.show(RightCard, "OUTPUT"));
+        btnDelete.addActionListener(e -> cardLayout.show(RightCard, "DELETE"));
+
+        f.setVisible(true);
+    }
+}

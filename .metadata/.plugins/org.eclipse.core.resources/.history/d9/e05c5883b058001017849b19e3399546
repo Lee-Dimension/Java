@@ -1,0 +1,18 @@
+package ProjectGPT;
+
+//Calculator.java
+//기본월급에 추가근무 수당을 계산해 최종 월급을 반환하는 클래스
+public class Calculator {
+    private static final double OVERTIME_RATE = 1.5;
+    private static final double NIGHT_RATE    = 1.5;
+    private static final double HOLIDAY_RATE  = 2.0;
+
+    public double calculate(Employee emp, WorkingTime wt) {
+        double base = emp.getMoney().getBaseSalary();
+        double hourly = base / 200;
+        double otPay = wt.getOvertimeHours() * hourly * OVERTIME_RATE;
+        double nhPay = wt.getNightHours()    * hourly * NIGHT_RATE;
+        double hdPay = wt.getHolidayHours()  * hourly * HOLIDAY_RATE;
+        return base + otPay + nhPay + hdPay;
+    }
+}

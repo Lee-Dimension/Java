@@ -1,0 +1,69 @@
+package NumberBaseBall;
+
+import java.util.*;
+
+public class NumberBaseBallAI {
+
+    // 가능한 모든 3자리 조합 생성
+    public static List<int[]> generateAllCombinations() {
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == i) continue;
+                for (int k = 0; k < 10; k++) {
+                    if (k == i || k == j) continue;
+                    list.add(new int[]{i, j, k});
+                }
+            }
+        }
+        return list;
+    }
+
+    // strike/ball 판단
+    public static int[] simulate(int[] guess, int[] answer) {
+        int strike = 0, ball = 0;
+        for (int i = 0; i < 3; i++) {
+            if (guess[i] == answer[i]) strike++;
+            else if (guess[i] == answer[0] || guess[i] == answer[1] || guess[i] == answer[2]) ball++;
+        }
+        return new int[]{strike, ball};
+    }
+
+    // 1게임 수행 → 몇 회만에 맞췄는지 반환
+    public static int playOneGame() {
+        List<int[]> candidates = generateAllCombinations(); // 후보군
+        Random rand = new Random();
+        int[] answer = candidates.get(rand.nextInt(candidates.size())); // 정답
+
+        int tries = 0;
+
+        while (!candidates.isEmpty()) {
+            int[] guess = candidates.get(0); // 간단하게 맨 앞 선택 (전략 최적화는 나중에)
+            tries++;
+
+            int[] result = simulate(guess, answer);
+            if (result[0] == 3) {
+                return tries; // 정답 맞춤
+            }
+
+            // 후보군 필터링: 같은 결과(strike, ball)가 나올 수 있는 것만 유지
+            int[] finalGuess = guess;
+            candidates = candidates.stream()
+                    .filter(c -> Arrays.equals(simulate(c, finalGuess), result))
+                    .toList();
+        }
+
+        return 1000; // 실패했을 경우
+    }
+
+    public static void main(String[] args) {
+        int trials = 100;
+        int total = 0;
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+
+
+        double avg = (double) total / trials;
+        System.out.printf("총 평균: %.2f회, 최소: %d회, 최대: %d회\n", avg, min, max);
+    }
+}

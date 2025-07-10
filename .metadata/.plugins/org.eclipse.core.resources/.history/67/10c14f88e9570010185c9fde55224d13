@@ -1,0 +1,32 @@
+package SalaryManagementProject;
+
+public class Tax{
+	public int tax(int amount) {
+      if (total <= 14000000) {
+         result = (total * 0.06);
+      }
+      else if(total > 14000000 || total <= 50000000) {
+         result = (total * 0.15);
+      }
+      else if (total > 50000000 || total <= 88000000) {
+         result = (total * 0.24);
+      }
+      else if (total > 88000000 || total <= 150000000) {
+         result = (total * 0.35);
+      }
+      else if (total > 150000000 || total <= 300000000) {
+         result = (total * 0.38);
+      }
+      else if (total > 300000000 || total <= 500000000) {
+         result = (total * 0.40);
+      }
+      else if (total > 500000000 || total <= 1000000000) {
+         result = (total * 0.42);
+      }
+      else {
+         result = (total * 0.45);
+      }
+      
+      return result;
+   }
+}

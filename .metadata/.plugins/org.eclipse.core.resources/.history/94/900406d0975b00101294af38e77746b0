@@ -1,0 +1,94 @@
+package NumberBaseBall;
+
+import java.util.*;
+
+public class NumberBaseBall2 {
+    // 가능한 모든 3자리 조합 생성
+    public static List<int[]> generateAllCombinations() {
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == i) continue;
+                for (int k = 0; k < 10; k++) {
+                    if (k == i || k == j) continue;
+                    list.add(new int[]{i, j, k});
+                }
+            }
+        }
+        return list;
+    }
+
+    // strike/ball 판정
+    public static int[] judge(int[] guess, int[] answer) {
+        int strike = 0, ball = 0;
+        for (int i = 0; i < 3; i++) {
+            if (guess[i] == answer[i]) strike++;
+            else if (guess[i] == answer[0] || guess[i] == answer[1] || guess[i] == answer[2]) ball++;
+        }
+        return new int[]{strike, ball};
+    }
+
+    // 후보군 필터링
+    public static List<int[]> filter(List<int[]> list, int[] guess, int strike, int ball) {
+        List<int[]> newList = new ArrayList<>();
+        for (int[] cand : list) {
+            int[] result = judge(guess, cand);
+            if (result[0] == strike && result[1] == ball) {
+                newList.add(cand);
+            }
+        }
+        return newList;
+    }
+
+    // 랜덤 3자리 정답 생성 (중복 없는)
+    public static int[] generateRandomAnswer(Random rand) {
+        List<Integer> digits = new ArrayList<>();
+        for (int i = 0; i < 10; i++) digits.add(i);
+        Collections.shuffle(digits, rand);
+        return new int[]{digits.get(0), digits.get(1), digits.get(2)};
+    }
+
+    // 게임 1회 시뮬레이션
+    public static int simulate(Random rand, boolean print) {
+        List<int[]> candidates = generateAllCombinations();
+        int[] answer = generateRandomAnswer(rand);
+
+        int tries = 0;
+
+        while (true) {
+            tries++;
+            int[] guess = candidates.get(0); // 남은 후보 중 첫번째
+
+            int[] result = judge(guess, answer);
+            if (print) {
+                System.out.println("AI 추측: " + guess[0] + "" + guess[1] + "" + guess[2] + " → Strike: " + result[0] + ", Ball: " + result[1]);
+            }
+            if (result[0] == 3) break;
+            candidates = filter(candidates, guess, result[0], result[1]);
+        }
+        return tries;
+    }
+
+    public static void main(String[] args) {
+        Random rand = new Random();
+        int totalTries = 0;
+        int rounds = 1000;
+        int maxTries = 0;
+        int minTries = 100;
+
+        for (int i = 0; i < rounds; i++) {
+            int tries = simulate(rand, false);
+            totalTries += tries;
+            if (tries > maxTries) maxTries = tries;
+            if (tries < minTries) minTries = tries;
+        }
+
+        System.out.println("1000번 자동실행 결과");
+        System.out.println("평균 시도 횟수: " + ((double)totalTries/rounds));
+        System.out.println("최소: " + minTries + "번, 최대: " + maxTries + "번");
+
+        // 한 번만 자세히 보고 싶으면 아래 실행
+        System.out.println("\n[AI 1회 추론 상세 출력]");
+        simulate(rand, true);
+    }
+}

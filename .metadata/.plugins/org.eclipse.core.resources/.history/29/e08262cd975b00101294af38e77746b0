@@ -1,0 +1,68 @@
+package NumberBaseBall;
+
+import java.util.*;
+
+public class NumberBaseBall21 {
+    // 가능한 모든 3자리 조합 생성
+    public static List<int[]> generateAllCombinations() {
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == i) continue;
+                for (int k = 0; k < 10; k++) {
+                    if (k == i || k == j) continue;
+                    list.add(new int[]{i, j, k});
+                }
+            }
+        }
+        return list;
+    }
+
+    // strike/ball 판정
+    public static int[] judge(int[] guess, int[] answer) {
+        int strike = 0, ball = 0;
+        for (int i = 0; i < 3; i++) {
+            if (guess[i] == answer[i]) strike++;
+            else if (guess[i] == answer[0] || guess[i] == answer[1] || guess[i] == answer[2]) ball++;
+        }
+        return new int[]{strike, ball};
+    }
+
+    // 후보군 필터링
+    public static List<int[]> filter(List<int[]> list, int[] guess, int strike, int ball) {
+        List<int[]> newList = new ArrayList<>();
+        for (int[] cand : list) {
+            int[] result = judge(guess, cand);
+            if (result[0] == strike && result[1] == ball) {
+                newList.add(cand);
+            }
+        }
+        return newList;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<int[]> candidates = generateAllCombinations();
+
+        System.out.print("정답(3자리, 공백없이): ");
+        String answerStr = sc.next();
+        int[] answer = {answerStr.charAt(0) - '0', answerStr.charAt(1) - '0', answerStr.charAt(2) - '0'};
+
+        int tries = 0;
+
+        while (true) {
+            tries++;
+            int[] guess = candidates.get(0); // 남은 후보 중 첫 번째(혹은 랜덤)
+            System.out.println("AI 추측: " + guess[0] + "" + guess[1] + "" + guess[2]);
+
+            int[] result = judge(guess, answer);
+            System.out.println("Strike: " + result[0] + ", Ball: " + result[1]);
+
+            if (result[0] == 3) {
+                System.out.println("AI가 " + tries + "번만에 맞췄습니다!");
+                break;
+            }
+            candidates = filter(candidates, guess, result[0], result[1]);
+        }
+    }
+}

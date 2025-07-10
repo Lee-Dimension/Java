@@ -1,0 +1,165 @@
+package day12;
+
+import java.util.*;
+import static java.lang.System.out;
+
+class Student{
+	String id;
+	String name;
+	int korean;
+	int english;
+	int math;
+	
+	public Student(String id, String name, int korean, int english, int math) {
+		this.id =id;
+		this.name = name;
+		this.korean = korean;
+		this.english = english;
+		this.math = math;
+	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+}
+
+
+public class GradeHashSet {
+    Scanner sc = new Scanner(System.in);
+    HashSet<Student> students = new HashSet<>();
+
+    // 입력
+    public void inputMethod() {
+        out.println("===========입력===========");
+        out.print("이름을 입력하세요 : ");
+        String name = sc.next();
+
+        out.print("국어점수를 입력하세요 : ");
+        int korean = sc.nextInt();
+
+        out.print("영어점수를 입력하세요 : ");
+        int english = sc.nextInt();
+
+        out.print("수학점수를 입력하세요 : ");
+        int math = sc.nextInt();
+
+        boolean added = students.add(new Student(name, korean, english, math));
+        if (added) out.println("저장완료");
+        else out.println("이미 존재하는 학생입니다.");
+    }
+
+    //출력
+    public void outputMethod() {
+        while (true) {
+            out.println("===========출력===========");
+            out.println("(1):전체출력\n(2):과목출력\n(3):돌아가기");
+            out.print("선택 : ");
+            int select = sc.nextInt();
+            if (select == 1) {
+                for (Student s : students) {
+                    out.println("---------------------------");
+                    out.println("이름 : " + s.name
+                            + "\n국어점수 : " + s.korean
+                            + "\n영어점수 : " + s.english
+                            + "\n수학점수 : " + s.math);
+                }
+            }
+            if (select == 2) {
+                out.print("어떤 과목을 출력하시겠습니까? ");
+                String sub = sc.next();
+                for (Student s : students) {
+                    if (sub.equals("국어"))
+                        out.println("이름 : " + s.name + "\n국어점수 : " + s.korean);
+                    else if (sub.equals("영어"))
+                        out.println("이름 : " + s.name + "\n영어점수 : " + s.english);
+                    else if (sub.equals("수학"))
+                        out.println("이름 : " + s.name + "\n수학점수 : " + s.math);
+                    else {
+                        out.println("과목명을 정확히 입력하세요.");
+                        break;
+                    }
+                }
+            }
+            if (select == 3) break;
+        }
+    }
+
+    // 검색
+    public void searchMethod() {
+        while (true) {
+            out.println("===========검색===========");
+            out.println("(1):이름으로 검색\n(2):평균으로 검색\n(3):돌아가기");
+            out.print("선택 : ");
+            int select = sc.nextInt();
+            if (select == 1) {
+                out.print("검색할 이름을 입력하세요 : ");
+                String stuName = sc.next();
+                boolean found = false;
+                for (Student s : students) {
+                    if (s.name.equals(stuName)) {
+                        out.println("이름 : " + s.name
+                                + "\n국어점수 : " + s.korean
+                                + "\n영어점수 : " + s.english
+                                + "\n수학점수 : " + s.math);
+                        found = true;
+                    }
+                }
+                if (!found) out.println("검색 결과가 없습니다.");
+            } else if (select == 2) {
+                out.print("평균 몇 점 이상을 검색하시겠습니까? ");
+                int stuMean = sc.nextInt();
+                boolean found = false;
+                for (Student s : students) {
+                    double avg = (s.korean + s.english + s.math) / 3.0;
+                    if (avg >= stuMean) {
+                        out.println("이름 : " + s.name
+                                + "\n국어점수 : " + s.korean
+                                + "\n영어점수 : " + s.english
+                                + "\n수학점수 : " + s.math
+                                + "\n평균 : " + avg);
+                        found = true;
+                    }
+                }
+                if (!found) out.println("조건에 맞는 학생이 없습니다.");
+            } else if (select == 3) break;
+        }
+    }
+
+    // 삭제
+    public void delete() {
+        out.print("삭제하려는 학생이름을 입력하세요 : ");
+        String stuName = sc.next();
+        Student temp = new Student(stuName, 0, 0, 0);
+        boolean removed = students.remove(temp);
+        if (removed) out.println("삭제하였습니다.");
+        else out.println("해당 이름의 학생이 없습니다.");
+    }
+
+    public static void main(String[] args) {
+        GradeHashSet gd = new GradeHashSet();
+        while (true) {
+            out.println("=========성적 관리 시스템=========");
+            out.println("(1):입력\n(2):출력\n(3):검색\n(4):삭제\n(5):종료");
+            out.print("선택 : ");
+            int select = gd.sc.nextInt();
+
+            if (select == 1) gd.inputMethod();
+            else if (select == 2) gd.outputMethod();
+            else if (select == 3) gd.searchMethod();
+            else if (select == 4) gd.delete();
+            else if (select == 5) {
+                out.println("종료합니다.");
+                return;
+            }
+            else out.println("잘못 선택하셨습니다.");
+        }
+    }
+}

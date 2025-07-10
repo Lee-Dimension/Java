@@ -1,0 +1,13 @@
+package day13;
+
+import java.awt.Frame;
+
+public class GridLayoutEx {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Frame f = new Frame("GridLayout");
+		
+	}
+
+}

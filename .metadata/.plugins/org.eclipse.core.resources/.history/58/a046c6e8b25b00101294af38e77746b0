@@ -1,0 +1,14 @@
+package day12;
+
+class Generic<T> {
+	
+	T[] v;
+	
+	public void set(T[] n) {
+		v = n;
+	}
+	public void print() {
+		for(T s:v)
+			System.out.prinln(s);
+	}
+}

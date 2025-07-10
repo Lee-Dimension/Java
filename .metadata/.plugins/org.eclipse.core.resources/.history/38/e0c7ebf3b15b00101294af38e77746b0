@@ -1,0 +1,86 @@
+package NumberBaseBall;
+
+public class NumberBaseBall21 {
+
+    public static void main(String[] args) {
+        int totalRound = 0;
+        int tryCount = 500;
+
+        for (int t = 0; t < tryCount; t++) {
+        	//정답 생성
+            int randomNumber1 = (int)(Math.random() * 10);
+            int randomNumber2 = (int)(Math.random() * 10);
+
+            do {
+                randomNumber2 = (int)(Math.random() * 10);
+            } while (randomNumber2 == randomNumber1);
+
+            int randomNumber3 = (int)(Math.random() * 10);
+            do {
+                randomNumber3 = (int)(Math.random() * 10);
+            } while (randomNumber3 == randomNumber1 || randomNumber3 == randomNumber2);
+
+            int[] Correct = {randomNumber1, randomNumber2, randomNumber3};
+            //모든 조합 생성
+            int[][] allCombi = new int[720][3];
+            int combiCnt = 0;
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if (j == i) continue;
+                    for (int k = 0; k < 10; k++) {
+                        if (k == i || k == j) continue;
+                        allCombi[combiCnt][0] = i;
+                        allCombi[combiCnt][1] = j;
+                        allCombi[combiCnt][2] = k;
+                        combiCnt++;
+                    }
+                }
+            }
+
+            int round = 0;
+
+            while (true) {
+                round++;
+                int[] Predict = {allCombi[0][0], allCombi[0][1], allCombi[0][2]};
+
+                int strike = 0;
+                int ball = 0;
+                
+                for (int i = 0; i < 3; i++) {
+                    if (Predict[i] == Correct[i]) {
+                        strike++;
+                    } else if (Predict[i] == Correct[0] || Predict[i] == Correct[1] || Predict[i] == Correct[2]) {
+                        ball++;
+                    }
+                }
+                if (strike == 3) {
+                    if (t == 0) {
+                        System.out.println("정답: " + Correct[0] + Correct[1] + Correct[2]);
+                        System.out.println(round + "번 만에 정답을 맞췄습니다!");
+                    }
+                    break;
+                }
+                //필터링
+                int newCnt = 0;
+                for (int idx = 0; idx < combiCnt; idx++) {
+                    int[] cand = {allCombi[idx][0], allCombi[idx][1], allCombi[idx][2]};
+                    int tempStrike = 0, tempBall = 0;
+                    for (int i = 0; i < 3; i++) {
+                        if (Predict[i] == cand[i]) tempStrike++;
+                        else if (Predict[i] == cand[0] || Predict[i] == cand[1] || Predict[i] == cand[2]) tempBall++;
+                    }
+                    if (tempStrike == strike && tempBall == ball) {
+                        allCombi[newCnt][0] = cand[0];
+                        allCombi[newCnt][1] = cand[1];
+                        allCombi[newCnt][2] = cand[2];
+                        newCnt++;
+                    }
+                }
+                combiCnt = newCnt;
+            }
+            totalRound += round;
+        }
+        System.out.println("------결과------");
+        System.out.println(tryCount+"회 실행 평균 라운드: " + ((double)totalRound/tryCount));
+    }
+}

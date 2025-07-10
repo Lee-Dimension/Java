@@ -1,0 +1,92 @@
+package DesignGrade;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class OutputPanel extends JPanel {
+    public OutputPanel() {
+        setBackground(new Color(255, 220, 220));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        JLabel outputLabel = new JLabel("출력", SwingConstants.CENTER);
+        outputLabel.setOpaque(true);
+        outputLabel.setBackground(new Color(210, 240, 250));
+        outputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        outputLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        add(outputLabel);
+        add(Box.createVerticalStrut(10));
+
+        JPanel outMiddle = new JPanel(new BorderLayout());
+        outMiddle.setBackground(new Color(255, 220, 220));
+
+        //출력 버튼 패널
+        JPanel outMidBtn = new JPanel(new GridLayout(4, 1, 10, 10));
+        outMidBtn.setBackground(new Color(255, 220, 220));
+        JButton btnAll = new JButton("전체출력");
+        btnAll.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnAll);
+        JButton btnKor = new JButton("국어출력");
+        btnKor.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnKor);
+        JButton btnEng = new JButton("영어출력");
+        btnEng.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnEng);
+        JButton btnMat = new JButton("수학출력");
+        btnMat.setBackground(new Color(210, 240, 250));
+        outMidBtn.add(btnMat);
+
+        outMiddle.add(outMidBtn, BorderLayout.WEST);
+
+        //출력창
+        JTextArea outputArea = new JTextArea(8,15);
+        outputArea.setEditable(false);
+        
+        JScrollPane scroll = new JScrollPane(outputArea);
+        outMiddle.add(scroll, BorderLayout.CENTER);
+        
+        add(outMiddle);
+
+        // ==== 버튼 이벤트 ====
+        btnAll.addActionListener(e -> {
+            StringBuilder sb = new StringBuilder();
+            for (Student s : StudentManager.students) {
+                sb.append("이름: ").append(s.name)
+                  .append(" | 국어:").append(s.korean)
+                  .append(" | 영어:").append(s.english)
+                  .append(" | 수학:").append(s.math)
+                  .append("\n");
+            }
+            outputArea.setText(sb.toString());
+        });
+
+        btnKor.addActionListener(e -> {
+            StringBuilder sb = new StringBuilder();
+            for (Student s : StudentManager.students) {
+                sb.append("이름: ").append(s.name)
+                  .append(" | 국어:").append(s.korean)
+                  .append("\n");
+            }
+            outputArea.setText(sb.toString());
+        });
+
+        btnEng.addActionListener(e -> {
+            StringBuilder sb = new StringBuilder();
+            for (Student s : StudentManager.students) {
+                sb.append("이름: ").append(s.name)
+                  .append(" | 영어:").append(s.english)
+                  .append("\n");
+            }
+            outputArea.setText(sb.toString());
+        });
+
+        btnMat.addActionListener(e -> {
+            StringBuilder sb = new StringBuilder();
+            for (Student s : StudentManager.students) {
+                sb.append("이름: ").append(s.name)
+                  .append(" | 수학:").append(s.math)
+                  .append("\n");
+            }
+            outputArea.setText(sb.toString());
+        });
+    }
+}

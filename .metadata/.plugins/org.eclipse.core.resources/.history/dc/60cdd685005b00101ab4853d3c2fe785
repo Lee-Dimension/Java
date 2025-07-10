@@ -1,0 +1,100 @@
+package NumberBaseBall;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+
+
+public class NumberBaseBall{
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		int randomNumber1 = (int)(Math.random() * 10);
+		int randomNumber2 = (int)(Math.random() * 10);
+		
+		do {
+		    randomNumber2 = (int)(Math.random() * 10);
+		} while (randomNumber2 == randomNumber1);
+
+		
+		int randomNumber3 = (int)(Math.random() * 10);
+		do {
+		    randomNumber3 = (int)(Math.random() * 10);
+		} while (randomNumber3 == randomNumber1 || randomNumber3 == randomNumber2);
+		
+		System.out.println(randomNumber1+""+randomNumber2+""+randomNumber3);
+		int round = 0;
+		int inputNum1=0,inputNum2 = 0,inputNum3=0;
+		
+		int [] Correct = {randomNumber1,randomNumber2, randomNumber3};
+		System.out.println("야구게임 시작!");
+		System.out.println("랜덤한 숫자 3자리가 준비되었습니다. 정답을 맞춰보세요!");
+		
+		while(true) {
+			round++;
+			System.out.println("------------------------------------");
+			System.out.println(round+"라운드");
+			
+			while(true) {
+	            try {
+	    			inputNum1 = sc.nextInt();
+	                break;
+	            } catch (InputMismatchException e) {
+	                System.out.println("[ERROR]숫자를 입력해주세요.");
+	                sc.nextLine(); 
+	            }
+			}
+			while(true) {
+	            try {
+	    			inputNum2 = sc.nextInt();
+	                break;
+	            } catch (InputMismatchException e) {
+	                System.out.println("[ERROR]숫자를 입력해주세요.");
+	                sc.nextLine(); 
+	            }
+			}
+			while(true) {
+	            try {
+	    			inputNum3 = sc.nextInt();
+	                break;
+	            } catch (InputMismatchException e) {
+	                System.out.println("[ERROR]숫자를 입력해주세요.");
+	                sc.nextLine(); 
+	            }
+			}
+			
+			if(inputNum1>9 || inputNum1<0 || inputNum2>9 || inputNum2<0 ||inputNum3>9 || inputNum3<0 ) {
+				System.out.println("[ERROR]0~9까지 숫자만 입력해주세요");
+				continue;
+			}
+			if (inputNum1 == inputNum2 || inputNum1 == inputNum3 || inputNum2 == inputNum3) {
+			    System.out.println("[ERROR] 중복되지 않은 서로 다른 숫자를 입력해주세요.");
+			    continue; // 라운드 다시
+			}
+			int [] Predict = {inputNum1, inputNum2, inputNum3};
+			int strike = 0;
+			int ball = 0;
+			
+			for (int i = 0; i < 3; i++) {
+			    if (Predict[i] == Correct[i]) {
+			        strike++;
+			    } else if (Predict[i] == Correct[0] || Predict[i] == Correct[1] || Predict[i] == Correct[2]) {
+			        ball++;
+			    }
+			    if (strike == 3) {
+			    	System.out.println("정답을 맞췄습니다! 축하드립니다!");
+			    	return;
+			    }
+			}
+
+			
+			System.out.println(strike + "스트라이크, " + ball + "볼\n");
+			}
+				
+	}
+
+		
+}
+
+

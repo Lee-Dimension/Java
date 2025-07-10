@@ -1,0 +1,100 @@
+package NumberBaseBall;
+
+public class NumberBaseBall21 {
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+        // 랜덤 정답 생성 (중복 없는 3자리)
+        int randomNumber1 = (int)(Math.random() * 10);
+        int randomNumber2 = (int)(Math.random() * 10);
+
+        do {
+            randomNumber2 = (int)(Math.random() * 10);
+        } while (randomNumber2 == randomNumber1);
+
+        int randomNumber3 = (int)(Math.random() * 10);
+        do {
+            randomNumber3 = (int)(Math.random() * 10);
+        } while (randomNumber3 == randomNumber1 || randomNumber3 == randomNumber2);
+
+        int[] Correct = {randomNumber1, randomNumber2, randomNumber3};
+        System.out.println("AI야구게임 시작!");
+        System.out.println("랜덤한 숫자 3자리가 준비되었습니다. (정답: " + Correct[0] + Correct[1] + Correct[2] + ")");
+
+        // 후보군 초기화
+        int[][] allCombi = new int[720][3];
+        int combiCnt = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == i) continue;
+                for (int k = 0; k < 10; k++) {
+                    if (k == i || k == j) continue;
+                    allCombi[combiCnt][0] = i;
+                    allCombi[combiCnt][1] = j;
+                    allCombi[combiCnt][2] = k;
+                    combiCnt++;
+                }
+            }
+        }
+
+        int round = 0;
+
+        while (true) {
+            round++;
+            System.out.println("------------------------------------");
+            System.out.println(round + "라운드");
+
+            // 추측(항상 후보군 맨 앞)
+            int[] Predict = {allCombi[0][0], allCombi[0][1], allCombi[0][2]};
+            System.out.println("AI 추측: " + Predict[0] + " " + Predict[1] + " " + Predict[2]);
+
+            int strike = 0;
+            int ball = 0;
+
+            // 판정
+            for (int i = 0; i < 3; i++) {
+                if (Predict[i] == Correct[i]) {
+                    strike++;
+                } else if (Predict[i] == Correct[0] || Predict[i] == Correct[1] || Predict[i] == Correct[2]) {
+                    ball++;
+                }
+            }
+
+            System.out.println(strike + "스트라이크, " + ball + "볼\n");
+
+            if (strike == 3) {
+                System.out.println(round+"번 만에 정답을 맞췄습니다!");
+                break;
+            }
+
+            // 후보군 필터링
+            int[][] newCombi = new int[720][3];
+            int newCnt = 0;
+            for (int idx = 0; idx < combiCnt; idx++) {
+                int[] cand = {allCombi[idx][0], allCombi[idx][1], allCombi[idx][2]};
+                int tempStrike = 0, tempBall = 0;
+                for (int i = 0; i < 3; i++) {
+                    if (Predict[i] == cand[i]) {
+                        tempStrike++;
+                    } else if (Predict[i] == cand[0] || Predict[i] == cand[1] || Predict[i] == cand[2]) {
+                        tempBall++;
+                    }
+                }
+                if (tempStrike == strike && tempBall == ball) {
+                    newCombi[newCnt][0] = cand[0];
+                    newCombi[newCnt][1] = cand[1];
+                    newCombi[newCnt][2] = cand[2];
+                    newCnt++;
+                }
+            }
+            // 후보군 갱신
+            for (int i = 0; i < newCnt; i++) {
+                allCombi[i][0] = newCombi[i][0];
+                allCombi[i][1] = newCombi[i][1];
+                allCombi[i][2] = newCombi[i][2];
+            }
+            combiCnt = newCnt;
+        }
+    }
+}

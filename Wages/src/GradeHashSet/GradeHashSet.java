@@ -22,7 +22,7 @@ class Student{
         if (this == o) return true;
         if (!(o instanceof Student)) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.id); // 학번 기준
+        return Objects.equals(id, student.id); 
     }
 
     @Override
@@ -96,6 +96,7 @@ public class GradeHashSet {
 
     // 검색
     public void searchMethod() {
+    	ArrayList<Student> list = new ArrayList<>(students); //정렬하기 위해 리스트로 생성
         while (true) {
             out.println("===========검색===========");
             out.println("(1):이름으로 검색\n(2):평균으로 검색\n(3):돌아가기");
@@ -119,7 +120,12 @@ public class GradeHashSet {
                 out.print("평균 몇 점 이상을 검색하시겠습니까? ");
                 int stuMean = sc.nextInt();
                 boolean found = false;
-                for (Student s : students) {
+                list.sort((a, b) -> {
+                    double avgA = (a.korean + a.english + a.math) / 3.0;
+                    double avgB = (b.korean + b.english + b.math) / 3.0;
+                    return Double.compare(avgB, avgA); // 내림차순
+                });
+                for (Student s : list) {
                     double avg = (s.korean + s.english + s.math) / 3.0;
                     if (avg >= stuMean) {
                         out.println("이름 : " + s.name
@@ -139,7 +145,7 @@ public class GradeHashSet {
     public void delete() {
     	out.print("삭제하려는 학생의 학번을 입력하세요 : ");
     	String stuId = sc.next();
-    	Student temp = new Student(stuId, "", 0, 0, 0);  // 이름, 점수는 아무 값이나 넣어도 됨
+    	Student temp = new Student(stuId, "", 0, 0, 0);
     	boolean removed = students.remove(temp);
     	if (removed) out.println("삭제하였습니다.");
     	else out.println("해당 학번의 학생이 없습니다.");

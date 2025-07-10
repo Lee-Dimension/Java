@@ -1,0 +1,44 @@
+package day14;
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class ActionEventEx extends Frame implements ActionListener{
+	Panel p;
+	Button input, exit;
+	TextArea ta;
+	
+	public ActionEventEx() {
+		super("ActionEvnet Test");
+		
+		p=new Panel();
+		
+		input=new Button("입력");
+		exit=new Button("종료");
+		ta = new TextArea();
+		
+		input.addActionListener(this);
+		exit.addActionListener(this);
+		
+		p.add(input);
+		p.add(exit);
+	}	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String name;
+		name=ae.getActionCommand();
+		if(name.equals("입력"))
+			ta.append("버튼이 입력되었습니다.");
+		else
+		{
+			ta.append("프로그램이 종료되었습니다.);
+		}
+	}
+
+}

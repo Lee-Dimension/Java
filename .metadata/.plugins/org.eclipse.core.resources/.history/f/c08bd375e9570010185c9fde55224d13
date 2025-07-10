@@ -1,0 +1,10 @@
+package SalaryManagementProject;
+
+public class Tax{
+	public int tax(int amount) {
+		double tax = amount * (percent / 100.0);
+		return (int)(amount - tax);
+		
+		
+	}
+}

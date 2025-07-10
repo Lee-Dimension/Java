@@ -1,0 +1,54 @@
+package NumberBaseBall;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class NumberBaseBall2{
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		int randomNumber1 = (int)(Math.random() * 10);
+		int randomNumber2 = (int)(Math.random() * 10);
+		do {
+		    randomNumber2 = (int)(Math.random() * 10);
+		} while (randomNumber2 == randomNumber1);
+
+		
+		int randomNumber3 = (int)(Math.random() * 10);
+		do {
+		    randomNumber3 = (int)(Math.random() * 10);
+		} while (randomNumber3 == randomNumber1 || randomNumber3 == randomNumber2);
+		
+		System.out.println("정답 : "+randomNumber1+""+randomNumber2+""+randomNumber3);
+		int round = 0;
+		int inputNum1=0,inputNum2 = 0,inputNum3=0;
+		
+		int [] Correct = {randomNumber1,randomNumber2, randomNumber3};
+		System.out.println("야구게임 시작!");
+		System.out.println("랜덤한 숫자 3자리가 준비되었습니다. 정답을 맞춰보겠습니다.");
+		
+		int predictNumber1,predictNumber2,predictNumber3;
+		
+		while(true) {
+			round++;
+			System.out.println("------------------------------------");
+			System.out.println(round+"라운드");
+			
+			predictNumber1 = (int)(Math.random() * 10);
+			predictNumber2 = (int)(Math.random() * 10);
+			do {
+				predictNumber2 = (int)(Math.random() * 10);
+			} while (predictNumber2 == predictNumber1);
+
+			
+			predictNumber3 = (int)(Math.random() * 10);
+			do {
+				predictNumber3 = (int)(Math.random() * 10);
+			} while (predictNumber3 == predictNumber1 || predictNumber3 == predictNumber2);
+			
+			
+		}		
+	}	
+}
+
+
