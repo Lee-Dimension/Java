@@ -7,4 +7,8 @@ public class StudentManager {
     public static void addStudent(Student s) {
         students.add(s);
     }
+    //파일 불러올때 씀
+    public static ArrayList<Student> getStudents(){
+    	return students;
+    }
 }

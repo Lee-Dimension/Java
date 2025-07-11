@@ -24,8 +24,8 @@ public class SearchPanel extends JPanel {
         
         JPanel searchModePanel = new JPanel(new GridLayout(1,2,10,10));
         searchModePanel.setBackground(Colors.VIOLET);
-	        //이름버튽
-	        JButton nameBtn = new JButton("이름");
+	        //학번버튼
+	        JButton nameBtn = new JButton("학번");
 	        nameBtn.setBackground(Colors.YELLOW);
 	        searchModePanel.add(nameBtn);
 	        //평균버튼
@@ -44,19 +44,19 @@ public class SearchPanel extends JPanel {
 		        JPanel searchNameBox = new JPanel();
 		        searchNameBox.setLayout(new BoxLayout(searchNameBox, BoxLayout.Y_AXIS));
 		        
-		        JPanel nameGrid = new JPanel(new GridLayout(1,3,10,10));
-		        nameGrid.setBackground(Colors.VIOLET);
+		        JPanel idGrid = new JPanel(new GridLayout(1,3,10,10));
+		        idGrid.setBackground(Colors.VIOLET);
 		        
-		        JLabel nameLabel = new JLabel("이름", SwingConstants.CENTER);
-		        nameGrid.add(nameLabel);
+		        JLabel nameLabel = new JLabel("학번", SwingConstants.CENTER);
+		        idGrid.add(nameLabel);
 		        
-		        JTextField nameField = new JTextField();
-		        nameGrid.add(nameField);
+		        JTextField idField = new JTextField();
+		        idGrid.add(idField);
 		        
 		        JButton nameButton = new JButton("확인");
 		        nameButton.setBackground(Colors.BLUE);
-		        nameGrid.add(nameButton);    
-		        searchNameBox.add(nameGrid);
+		        idGrid.add(nameButton);    
+		        searchNameBox.add(idGrid);
 	        
 		        //출력창
 		        JTextArea outPutArea = new JTextArea(10, 20);
@@ -65,12 +65,13 @@ public class SearchPanel extends JPanel {
 		        
 		        // 이름검색 동작
 		        nameButton.addActionListener(e -> {
-		            String searchName = nameField.getText();
+		            String searchId = idField.getText();
 		            boolean found = false;
 		            StringBuilder sb = new StringBuilder();
 		            for (Student s : StudentManager.students) {
-		                if (s.name.equals(searchName)) {
+		                if (s.stuId.equals(searchId)) {
 		                    sb.append("이름: ").append(s.name)
+		                      .append(" | 학번: ").append(s.stuId)
 		                      .append("\n국어: ").append(s.korean)
 		                      .append("\n영어: ").append(s.english)
 		                      .append("\n수학: ").append(s.math);
@@ -137,11 +138,12 @@ public class SearchPanel extends JPanel {
 		                for (Student s : filtered) {
 		                    double avg = (s.korean + s.english + s.math) / 3.0;
 		                    sb.append("이름: ").append(s.name)
-		                      .append(" | 평균: ").append(String.format("%.2f", avg))
-		                      .append("\n국어: ").append(s.korean)
+		                      .append(" | 학번: ").append(s.stuId)
+		                      .append("\n평균: ").append(String.format("%.2f", avg))
+		                      .append(" | 국어: ").append(s.korean)
 		                      .append(" | 영어: ").append(s.english)
 		                      .append(" | 수학: ").append(s.math)
-		                      .append("\n\n");
+		                      .append("\n------------------------------------------\n");
 		                }
 		            }
 		            meanOutArea.setText(sb.toString());

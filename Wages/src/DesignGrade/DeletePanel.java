@@ -18,10 +18,10 @@ public class DeletePanel extends JPanel {
         add(deleteLabel);
         add(Box.createVerticalStrut(80));
 
-        //이름라벨과 입력칸
+        //학번 라벨과 입력칸
         JPanel delInputName = new JPanel(new GridLayout(1,2,10,10));
         delInputName.setBackground(Colors.VIOLET);
-        JLabel delName = new JLabel("이름", SwingConstants.CENTER);
+        JLabel delName = new JLabel("학번", SwingConstants.CENTER);
         delInputName.add(delName);
         JTextField delInput = new JTextField(10);
         delInputName.add(delInput);
@@ -37,14 +37,16 @@ public class DeletePanel extends JPanel {
         
         //버튼 기능 구현
         delButton.addActionListener(e -> {
-            String stuName = delInput.getText();
+            String stuId = delInput.getText();
             boolean found = false;
             Iterator<Student> iter = StudentManager.students.iterator();
             
             while (iter.hasNext()) {
                 Student s = iter.next();
-                if (s.name.equals(stuName)) {
+                if (s.stuId.equals(stuId)) {
                     iter.remove();
+                    //파일로 저장
+                    FileManager.saveFile(StudentManager.students);
                     JOptionPane.showMessageDialog(this, "삭제하였습니다.");
                     found = true;
                     break;

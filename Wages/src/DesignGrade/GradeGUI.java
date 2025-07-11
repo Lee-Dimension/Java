@@ -6,6 +6,9 @@ import java.awt.*;
 
 public class GradeGUI {
     public static void main(String[] args) {
+    	//파일 불러오기 
+    	StudentManager.students = FileManager.loadFile();
+    	//메인 프레임
         JFrame f = new JFrame("성적 처리기");
         f.setSize(400,300);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +31,7 @@ public class GradeGUI {
 	        btnOutput.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 	        btnOutput.setBackground(Colors.YELLOW);
 	        btnOutput.setPreferredSize(new Dimension(120, 40));
-	        btnOutput.setMaximumSize(new Dimension(120, 60));
+	        btnOutput.setMaximumSize(new Dimension(200, 100));
 	        btnPanel.add(btnOutput);
 	        btnPanel.add(Box.createVerticalGlue());
 	        JButton btnSearch = new JButton("검색");
@@ -73,5 +76,6 @@ public class GradeGUI {
         btnDelete.addActionListener(e -> cardLayout.show(RightCard, "DELETE"));
 
         f.setVisible(true);
+        
     }
 }

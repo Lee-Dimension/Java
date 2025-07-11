@@ -18,17 +18,20 @@ public class InputPanel extends JPanel {
         add(inputLabel);
         add(Box.createVerticalStrut(10));
         
-        //이름, 성적 기입하는 곳(박수 중간)
-        JPanel inMiddle = new JPanel(new GridLayout(4, 2, 10, 10));
+        //이름, 성적 기입하는 곳(박스 중간)
+        JPanel inMiddle = new JPanel(new GridLayout(5, 2, 10, 10));
         inMiddle.setBackground(Colors.VIOLET);
 
-        JTextField nameField = new JTextField(15);
-        JTextField korField = new JTextField(5);
-        JTextField engField = new JTextField(5);
-        JTextField matField = new JTextField(5);
+        JTextField nameField = new JTextField();
+        JTextField stuIdField = new JTextField();
+        JTextField korField = new JTextField();
+        JTextField engField = new JTextField();
+        JTextField matField = new JTextField();
 
         inMiddle.add(new JLabel("이름"));
         inMiddle.add(nameField);
+        inMiddle.add(new JLabel("학번"));
+        inMiddle.add(stuIdField);
         inMiddle.add(new JLabel("국어점수"));
         inMiddle.add(korField);
         inMiddle.add(new JLabel("영어점수"));
@@ -47,10 +50,13 @@ public class InputPanel extends JPanel {
         // 저장 버튼 이벤트 나중에 예외처리하기
         saveBtn.addActionListener(e -> {
             String name = nameField.getText();
+            String stuId = stuIdField.getText();
             int kor = Integer.parseInt(korField.getText());
             int eng = Integer.parseInt(engField.getText());
             int mat = Integer.parseInt(matField.getText());
-            StudentManager.addStudent(new Student(name, kor, eng, mat));
+            StudentManager.addStudent(new Student(name, stuId, kor, eng, mat));
+            //파일로 저장
+            FileManager.saveFile(StudentManager.getStudents());
             //알림
             JOptionPane.showMessageDialog(this, "저장되었습니다.");
             // 입력값 클리어

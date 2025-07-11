@@ -52,10 +52,11 @@ public class OutputPanel extends JPanel {
             StringBuilder sb = new StringBuilder();
             for (Student s : StudentManager.students) {
                 sb.append("이름: ").append(s.name)
-                  .append(" | 국어:").append(s.korean)
+                  .append(" | 학번: ").append(s.stuId)
+                  .append("\n국어:").append(s.korean)
                   .append(" | 영어:").append(s.english)
                   .append(" | 수학:").append(s.math)
-                  .append("\n");
+                  .append("\n-----------------------------------------\n");
             }
             outputArea.setText(sb.toString());
         });
@@ -64,8 +65,9 @@ public class OutputPanel extends JPanel {
             StringBuilder sb = new StringBuilder();
             for (Student s : StudentManager.students) {
                 sb.append("이름: ").append(s.name)
-                  .append(" | 국어:").append(s.korean)
-                  .append("\n");
+                  .append(" | 학번: ").append(s.stuId)
+                  .append("\n국어:").append(s.korean)
+                  .append("\n-----------------------------------------\n");
             }
             outputArea.setText(sb.toString());
         });
@@ -74,8 +76,9 @@ public class OutputPanel extends JPanel {
             StringBuilder sb = new StringBuilder();
             for (Student s : StudentManager.students) {
                 sb.append("이름: ").append(s.name)
-                  .append(" | 영어:").append(s.english)
-                  .append("\n");
+                  .append(" | 학번: ").append(s.stuId)
+                  .append("\n영어:").append(s.english)
+                  .append("\n-----------------------------------------\n");
             }
             outputArea.setText(sb.toString());
         });
@@ -84,8 +87,9 @@ public class OutputPanel extends JPanel {
             StringBuilder sb = new StringBuilder();
             for (Student s : StudentManager.students) {
                 sb.append("이름: ").append(s.name)
-                  .append(" | 수학:").append(s.math)
-                  .append("\n");
+                  .append(" | 학번: ").append(s.stuId)
+                  .append("\n수학:").append(s.math)
+                  .append("\n-----------------------------------------\n");
             }
             outputArea.setText(sb.toString());
         });
