@@ -23,7 +23,7 @@ public class NumberBaseBall{
 		
 		System.out.println(randomNumber1+""+randomNumber2+""+randomNumber3);
 		int round = 0;
-		int inputNum1=0,inputNum2 = 0,inputNum3=0;a
+		int inputNum1=0,inputNum2 = 0,inputNum3=0;
 		
 		int [] Correct = {randomNumber1,randomNumber2, randomNumber3};
 		System.out.println("야구게임 시작!");

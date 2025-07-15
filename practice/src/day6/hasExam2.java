@@ -2,7 +2,7 @@ package day6;
 
 import java.util.Scanner;
 
-class Name { //이름 클래스
+class Name2 { //이름 클래스
     private String name;
 
     public String getName() {
@@ -27,7 +27,7 @@ class Subject { //과목 점수 클래스
 public class hasExam2 {
     Scanner sc = new Scanner(System.in);
 
-    private Name name;
+    private Name2 name;
     private Subject kor;
     private Subject eng;
     private Subject mat;
@@ -36,7 +36,7 @@ public class hasExam2 {
     private float avg;
 
     public hasExam2() {
-        name = new Name();
+        name = new Name2();
         kor = new Subject();
         eng = new Subject(); 
         mat = new Subject(); 

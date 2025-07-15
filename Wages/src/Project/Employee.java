@@ -32,27 +32,27 @@ class Employee{
 
 	
 
-	public void setNightTime(int nightTime){
-		this.money.setNightTime(nightTime); }
-	public int getNightTime(){
-		return money.getNightTime();}
-
-	public void setOverTime(int overTime){
-		this.money.setOverTime(overTime); }
-	public int getOverTime(){
-		return money.getOverTime();}
-
-	public void setHoliTime(int holiTime){
-		this.money.setHoliTime(holiTime); }
-	public int getHoliTime(){
-		return money.getHoliTime();
-	
+//	public void setNightTime(int nightTime){
+//		this.money.setNightTime(nightTime); }
+//	public int getNightTime(){
+//		return money.getNightTime();}
+//
+//	public void setOverTime(int overTime){
+//		this.money.setOverTime(overTime); }
+//	public int getOverTime(){
+//		return money.getOverTime();}
+//
+//	public void setHoliTime(int holiTime){
+//		this.money.setHoliTime(holiTime); }
+//	public int getHoliTime(){
+//		return money.getHoliTime();
+//	
 	}
 
 	
 
 		
-}
+
 
 
 
@@ -83,13 +83,13 @@ class Manager{ //배열 생성 후 객체 저장
 	   }
 
 	   
-	   public String getName() {  return getName();  }
-	   public int getNumber() {  return emp[number].getNum();  }
-	   public int getMoney() {  return emp[number].money.getMoney();  }
-	   public int getoverPay() { return emp[number].money.getoverPay();}
-	   public int getholiPay() { return emp[number].money.getholiPay();}
-	   public int getBonusMoney() { return emp[number].money.getBonusMoney();}
-	   public int getTotalMoney() { return emp[number].money.getTotalMoney();}
+//	   public String getName() {  return getName();  }
+//	   public int getNumber() {  return emp[number].getNum();  }
+//	   public int getMoney() {  return emp[number].money.getMoney();  }
+//	   public int getoverPay() { return emp[number].money.getoverPay();}
+//	   public int getholiPay() { return emp[number].money.getholiPay();}
+//	   public int getBonusMoney() { return emp[number].money.getBonusMoney();}
+//	   public int getTotalMoney() { return emp[number].money.getTotalMoney();}
 		   
 	   
 	   
@@ -103,13 +103,13 @@ class Manager{ //배열 생성 후 객체 저장
 	         print("사번 : ");
 	         emp[i].setNum(intin());
 	         print("기본금 : ");
-	         emp[i].money.setMoney(intin());
-	         print("야간시간 :");
-	         emp[i].money.setNightTime(intin());
-	         print("초과시간 : ");
-	         emp[i].money.setOverTime(intin());
-	         print("휴일시간 :");
-	         emp[i].money.setHoliTime(intin());
+//	         emp[i].money.setMoney(intin());
+//	         print("야간시간 :");
+//	         emp[i].money.setNightTime(intin());
+//	         print("초과시간 : ");
+//	         emp[i].money.setOverTime(intin());
+//	         print("휴일시간 :");
+//	         emp[i].money.setHoliTime(intin());
 	         
 	   }
 	      

@@ -30,14 +30,14 @@ class Calculator { //계산 기능 계산식만
 	   public int getBonusMoney() {
 		   return overPay + nightPay + holiPay;
 	   }
-	   public int getTotalMoney() {
-		   return wt.getMoney()+getholiPay() + getnightPay() + getholiPay();
-	   }
-	   public void setMoney(int num) {
-		   wt.setMoney(num);
-	   }
-	   public int getMoney() {
-		   return wt.getMoney();
-	   }
+//	   public int getTotalMoney() {
+//		   return wt.getMoney()+getholiPay() + getnightPay() + getholiPay();
+//	   }
+//	   public void setMoney(int num) {
+//		   wt.setMoney(num);
+//	   }
+//	   public int getMoney() {
+//		   return wt.getMoney();
+//	   }
 	 
 	}

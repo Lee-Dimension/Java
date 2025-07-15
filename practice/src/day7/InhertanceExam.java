@@ -42,21 +42,21 @@ package day7;
 //	}
 //}
 
-public class InhertanceExam extends A {
-	private int b;
-	public InhertanceExam() {
-		//super(); 는 항상 있음. 생략되어있을 뿐.
-		System.out.println("sub 생성자");
-	}
-
-	public static void main(String[] args) {
-		
-		InhertanceExam in = new InhertanceExam();
-		
-		System.out.println(in.toString());
-		System.out.println(in.getA());
-		System.out.println(in.a);
-		System.out.println(in.b);
-	}
-
-}
+//public class InhertanceExam extends A {
+//	private int b;
+//	public InhertanceExam() {
+//		//super(); 는 항상 있음. 생략되어있을 뿐.
+//		System.out.println("sub 생성자");
+//	}
+//
+//	public static void main(String[] args) {
+//		
+//		InhertanceExam in = new InhertanceExam();
+//		
+//		System.out.println(in.toString());
+//		System.out.println(in.getA());
+//		System.out.println(in.a);
+//		System.out.println(in.b);
+//	}
+//
+//}
