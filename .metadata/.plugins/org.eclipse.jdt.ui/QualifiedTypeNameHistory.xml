@@ -11,4 +11,6 @@
     <fullyQualifiedTypeName name="DesignGrade.Colors"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.awt.CardLayout"/>
+    <fullyQualifiedTypeName name="KokoaTalk.Colors"/>
 </qualifiedTypeNameHistroy>

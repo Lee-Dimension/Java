@@ -54,5 +54,4 @@ public class EchoClient {
 		// TODO Auto-generated method stub
 		new EchoClient("localhost", 3000);
 	}
-
 }

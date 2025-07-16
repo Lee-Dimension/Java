@@ -1,4 +1,4 @@
-package KakaoTalk;
+package KakaoTalkMinor;
 
 import java.io.*;
 import java.net.*;

@@ -1,4 +1,4 @@
-package KakaoTalk;
+package KakaoTalkMinor;
 //장난으로 만든거임 기록 ㄴㄴ
 import java.io.*;
 import java.net.*;
